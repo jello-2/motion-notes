@@ -11,6 +11,7 @@ export const fakeData = [
             colorText: "#18181A",
         }),
         position: JSON.stringify({ x: 505, y: 10 }),
+        width:"400",
     },
     {
         $id: 2,
@@ -24,6 +25,7 @@ export const fakeData = [
             colorText: "#18181A",
         }),
         position: JSON.stringify({ x: 305, y: 110 }),
+        width:"400",
     },
     {
         $id: 3,
@@ -37,5 +39,6 @@ export const fakeData = [
             colorText: "#18181A",
         }),
         position: JSON.stringify({ x: 605, y: 500 }),
+        width:"400",
     },
 ];

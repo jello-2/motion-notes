@@ -1,11 +1,11 @@
 import { fakeData as notes } from "../assets/fakeData.js";
-import NoteCard from "../components/NoteCard";
+import Card from "../cards/TemplateCard.jsx"
  
 const NotesPage = () => {
     return (
         <div>
             {notes.map((note) => (
-                <NoteCard note={note} key={note.$id} />
+                <Card key={note.id} widget={note} />
             ))}
         </div>
     );
