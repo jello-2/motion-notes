@@ -12,6 +12,10 @@ const colorPresets = [
     { name: 'Lemon Chiffon', header: '#f9ebbe', body: '#FAFAD2', text: '#8B8B00' },
     { name: 'Baby Blue', header: '#ADD8E6', body: '#F0F8FF', text: '#00008B' },
     { name: 'Blush Pink', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
+    { name: 'Nature', header: '#e71dc', body: '#d4e3c4', text: '#8B008B' },
+    { name: 'Dreamy', header: '#EEECF4', body: '#F7F6FC', text: '#8B008B' },
+    { name: 'Foggy', header: '#A2A2A2', body: '#DCDCDC', text: '#8B008B' },
+    { name: 'Cloudy', header: '#4FB66', body: '#65737e', text: '#FFFFF' }
 ];
 
 const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
