@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import Room from './room/Room';
-import createRoom from "./room/CreateRoom";
+
+import NotesPage from"./pages/NoteCards.jsx";
 
 function Home() {
     const [roomCode, setRoomCode] = useState('');
@@ -82,12 +82,7 @@ function Home() {
 function App() {
     return (
         <div>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/room/:roomId" element={<Room />} />
-                </Routes>
-            </Router>
+            <NotesPage/>
         </div>
     );
 }
