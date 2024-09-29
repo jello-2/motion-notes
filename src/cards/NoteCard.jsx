@@ -37,23 +37,28 @@ const NoteCard = ({ note, prompt }) => {
 
     const handleSummarize = async () => {
         console.log(`Summarize and format this text for me: ${textAreaRef.current.value}`);
-        const formattedText = await ask(`Summarize and format this text for me: ${textAreaRef.current.value}`);
-        textAreaRef.current.value = formattedText; // Update the text area with the summarized text
-        saveData("body", formattedText); // Save the formatted text to the backend
+        const formattedText = await ask(`Answer this prompt for me professional and concisely, briefly like a master in whatever field i may have a question in, no whitespace at the end, dont include any text formatting. Start your reply with: Here's what I think: ${textAreaRef.current.value}`);
+        textAreaRef.current.value = formattedText;
+        saveData("body", formattedText);
+        autoGrow(textAreaRef); // Add this line to trigger autogrow after updating content
     };
 
     return (
-        <div className="card-body">
+        <div className="card-body flex flex-col items-center">
             <textarea
                 onKeyUp={handleKeyUp}
                 ref={textAreaRef}
-                style={{ color: colors.colorText }}
+                style={{ color: colors.colorText, width: '100%' }}
                 defaultValue={body}
                 onInput={() => autoGrow(textAreaRef)}
+                className="w-full mb-4 p-2 border rounded-md"
             />
-            <button onClick={handleSummarize} className="summarize-button flex flex-row">
-                Motion Ask |
-                <img src='/motion.png' className='w-5 h-5'></img>
+            <button 
+                onClick={handleSummarize} 
+                className="motion-ask-button flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition-colors duration-300"
+            >
+                <span className="mr-2">Motion Ask</span>
+                <img src='/motion.png' alt="Motion icon" className='w-5 h-5' />
             </button>
         </div>
     );
