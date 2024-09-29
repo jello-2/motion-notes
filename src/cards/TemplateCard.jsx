@@ -6,16 +6,21 @@ import deleteNote from '../room/DeleteWidget.jsx';
 import { setNewOffset, setZIndex, gridsnap } from '../utils.js';
 
 const colorPresets = [
+    // Pastel Colors
     { name: 'Soft Peach', header: '#FFDAB9', body: '#FFF0E6', text: '#8B4513' },
     { name: 'Mint Dream', header: '#c9e7d2', body: '#F0FFF0', text: '#006400' },
     { name: 'Lavender Mist', header: '#E6E6FA', body: '#F8F8FF', text: '#4B0082' },
     { name: 'Lemon Chiffon', header: '#f9ebbe', body: '#FAFAD2', text: '#8B8B00' },
     { name: 'Baby Blue', header: '#ADD8E6', body: '#F0F8FF', text: '#00008B' },
     { name: 'Blush Pink', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
+
+// Earthy/Neutral Colors
     { name: 'Nature', header: '#8b9a71', body: '#ced2ba', text: '#4a6f28' },
     { name: 'Cloudy', header: '#A2A2A2', body: '#dcdcdc', text: '#000000' },
     { name: 'Slate Gray', header: '#6D7F9A', body: '#B7C9D8', text: '#2F4F66' },
     { name: 'Soft Lavender', header: '#8B7FB0', body: '#D3C9E7', text: '#4E3D66' },
+
+// Bold Colors
     { name: 'Mustard Yellow', header: '#BFAF3A', body: '#E5D66D', text: '#7A6B00' },
     { name: 'Retro Aqua', header: '#009B77', body: '#66C8B8', text: '#006B4E' },
     { name: 'Coral Red', header: '#D7534E', body: '#F2A1A0', text: '#9B3B3B' },
