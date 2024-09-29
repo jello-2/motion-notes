@@ -23,11 +23,6 @@ function HomePage() {
                     <img src='/motion.png' className='h-10 w-10'></img>
                     <div className=" ml-8 text-2xl font-bold">Motion</div>
                 </div>
-
-                <nav className="space-x-8">
-                    <a href="#features" className="hover:text-blue-400 transition-colors">Features</a>
-                    <a href="#about" className="hover:text-blue-400 transition-colors">About</a>
-                </nav>
             </header>
 
             <main className="container mx-auto px-16 py-12">
@@ -63,7 +58,7 @@ function HomePage() {
                     </button>
                 </section>
 
-                <section id="features" className="grid md:grid-cols-3 gap-8 mb-16">
+                <section className="grid md:grid-cols-3 gap-8 mb-16">
                     {['Real-Time Collaboration', 'Smart Organization', 'Productivity Boost'].map((feature, index) => (
                         <motion.div
                             key={index}
@@ -87,7 +82,7 @@ function HomePage() {
             </main>
 
             <footer className="container mx-auto px-4 py-6 text-center text-gray-500">
-                <p>&copy; 2024 Notes Pro Max+. All rights reserved.</p>
+                <p>&copy; 2024 Motion. All rights reserved.</p>
             </footer>
         </div>
     );

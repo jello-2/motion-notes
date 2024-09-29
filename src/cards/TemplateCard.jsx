@@ -1,36 +1,48 @@
-import {setNewOffset, setZIndex, gridsnap} from '../utils.js'
-import {useRef, useState} from "react";
-
+import React, { useRef, useState } from "react";
 import { Sliders, Trash2 } from 'react-feather';
 import { useParams } from 'react-router-dom';
 import updateWidget from '../room/UpdateWidget.jsx';
 import deleteNote from '../room/DeleteWidget.jsx';
-import ChangeColor from '../room/ChangeColor.jsx'
+import { setNewOffset, setZIndex, gridsnap } from '../utils.js';
+
+const colorPresets = [
+    { name: 'Soft Peach', header: '#FFDAB9', body: '#FFF0E6', text: '#8B4513' },
+    { name: 'Mint Dream', header: '#98FB98', body: '#F0FFF0', text: '#006400' },
+    { name: 'Lavender Mist', header: '#E6E6FA', body: '#F8F8FF', text: '#4B0082' },
+    { name: 'Lemon Chiffon', header: '#FFFACD', body: '#FAFAD2', text: '#8B8B00' },
+    { name: 'Baby Blue', header: '#ADD8E6', body: '#F0F8FF', text: '#00008B' },
+    { name: 'Blush Pink', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
+    { name: 'n', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
+];
 
 const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
-    const [width, setWidth] = useState(widget.width)
-    const [position,setPosition] = useState(widget.position)
+    const [width, setWidth] = useState(widget.width);
+    const [position, setPosition] = useState(widget.position);
+    const [colors, setColors] = useState(widget.colors);
+    const [showColorPicker, setShowColorPicker] = useState(false);
 
-    const {roomId} = useParams();
-    const colors = widget.colors
-
-    let dragStartPosX = 0;
-    let mouseStartPos = { x: 0, y: 0 };
+    const { roomId } = useParams();
 
     const cardRef = useRef(null);
     const isResizing = useRef(false);
 
+    let dragStartPosX = 0;
+    let mouseStartPos = { x: 0, y: 0 };
 
     const handleDelete = async () => {
-        onDelete(widget.id); // Call the onDelete callback to update Room state
+        onDelete(widget.id);
         await deleteNote(roomId, widget.id);
     };
 
-    const handleColor = async() =>{
-        ChangeColor(roomId,widget.id);
-        return;
-    }
+    const toggleColorPicker = () => {
+        setShowColorPicker(!showColorPicker);
+    };
 
+    const handleColorChange = (preset) => {
+        setColors(preset);
+        saveData("colors", preset);
+        setShowColorPicker(false);
+    };
 
     const mouseDown = (e) =>{
         setZIndex(cardRef.current);
@@ -106,32 +118,51 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     };
 
     return (
-        <div ref = {cardRef}
-        onMouseMove ={resizeMouseMove}
-        onMouseUp={resizeMouseUp}
-        onMouseLeave={resizeMouseUp}
-        className="card" 
-        style={{
-            backgroundColor: colors.colorBody, 
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-            width: `${width}px`}}
+        <div ref={cardRef}
+            onMouseMove={resizeMouseMove}
+            onMouseUp={resizeMouseUp}
+            onMouseLeave={resizeMouseUp}
+            className="card relative" 
+            style={{
+                backgroundColor: colors.body, 
+                color: colors.text,
+                left: `${position.x}px`,
+                top: `${position.y}px`,
+                width: `${width}px`
+            }}
         >
             <div
-                onMouseDown = {mouseDown}
-                className = "card-header" 
-                style = {{backgroundColor:colors.colorHeader}}
+                onMouseDown={mouseDown}
+                className="card-header" 
+                style={{ backgroundColor: colors.header }}
             >
                 <div className='flex flex-row'>
-                    <Sliders size={16} color='black' className='m-1' onClick = {handleColor}/>
-                    <Trash2 size={16} color='black' className='m-1' onClick={handleDelete} />
+                    <Sliders size={16} color={colors.text} className='m-1 cursor-pointer' onClick={toggleColorPicker} />
+                    <Trash2 size={16} color={colors.text} className='m-1 cursor-pointer' onClick={handleDelete} />
                 </div>
             </div>
             
+            {showColorPicker && (
+                <div className="absolute top-full left-0 mt-2 p-2 bg-white border rounded shadow-lg z-10">
+                    <div className="grid grid-cols-2 gap-2">
+                        {colorPresets.map((preset, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handleColorChange(preset)}
+                                className="flex flex-col items-center p-2 rounded transition-transform hover:scale-105"
+                                style={{ backgroundColor: preset.body, color: preset.text }}
+                            >
+                                <div className="w-full h-6 mb-1 rounded" style={{ backgroundColor: preset.header }}></div>
+                                <span className="text-xs">{preset.name}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+            
             <BodyComponent />
 
-
-            <div className = "resize-handle top-8" onMouseDown={resizeMouseDown}/>
+            <div className="resize-handle top-8" onMouseDown={resizeMouseDown}/>
         </div>
     );
 };
