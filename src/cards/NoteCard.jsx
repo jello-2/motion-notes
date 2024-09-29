@@ -1,91 +1,52 @@
-import { useEffect, useRef, useState } from "react";
-import {setNewOffset, setZIndex} from '../utils.js'
+import {autoGrow} from '../utils.js'
+import {useRef, useEffect} from "react";
+import updateWidget from '../room/UpdateWidget.jsx';
+import { useParams } from 'react-router-dom';
+
 
 const NoteCard = ({ note }) => {
-    const [position, setPosition] = useState(JSON.parse(note.position));
-    const colors = JSON.parse(note.colors);
-    const body = JSON.parse(note.body);
-    const textAreaRef = useRef(null);
+    const {roomId} = useParams();
 
-    let mouseStartPos = { x: 0, y: 0 };
- 
-    const cardRef = useRef(null);
+    const textAreaRef = useRef(null)
+    const keyUpTimer = useRef(null);
 
+    const colors = note.colors
+    const body = note.body
 
-    useEffect(() => {
-        autoGrow(textAreaRef);
-    }, []);
-     
-    function autoGrow(textAreaRef) {
-        const { current } = textAreaRef;
-        current.style.height = "auto"; // Reset the height
-        current.style.height = current.scrollHeight + "px"; // Set the new height
-    }
+    useEffect(() =>{
+        autoGrow(textAreaRef)
+    })
 
-    const mouseDown = (e) => {
-        setZIndex(cardRef.current);
-        mouseStartPos.x = e.clientX;
-        mouseStartPos.y = e.clientY;
-     
-        document.addEventListener("mousemove", mouseMove);
-        document.addEventListener("mouseup", mouseUp);
+    const handleKeyUp = async () => {
+        if (keyUpTimer.current) {
+            clearTimeout(keyUpTimer.current);
+        }
+        keyUpTimer.current = setTimeout(() => {
+            saveData("body", textAreaRef.current.value);
+        }, 1000);
     };
 
-    const mouseUp = () => {
-        document.removeEventListener("mousemove", mouseMove);
-        document.removeEventListener("mouseup", mouseUp);
-    };
-
-
-
-    const mouseMove = (e) => {
-        let mouseMoveDir = {
-            x: mouseStartPos.x - e.clientX,
-            y: mouseStartPos.y - e.clientY,
-        };
-     
-        mouseStartPos.x = e.clientX;
-        mouseStartPos.y = e.clientY;
-     
-        const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
-        setPosition(newPosition);
-     
+    const saveData = async (key, value) => {
+        const payload = { [key]: JSON.stringify(value) };
+        try {
+            await updateWidget(roomId, note.id, payload);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
 
     return (
-        <div
-        className="card"
-        style={{
-            backgroundColor: colors.colorBody,
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-        }}
-    >
-        <div
-        className="card-header"
-        style={{ backgroundColor: colors.colorHeader }}
-        onMouseDown = { mouseDown }
-    ></div>
-
-        
-             <div className="card-body">
-             <textarea
-            onFocus={() => {
-                setZIndex(cardRef.current);
-}}
-
-    ref={textAreaRef}
-            style={{ color: colors.colorText }}
-            defaultValue={body}
-            onInput={() => {
-                autoGrow(textAreaRef);
-           }}
-
-        ></textarea>
+        <div className = "card-body">
+            <textarea
+                onKeyUp={handleKeyUp}
+                ref = {textAreaRef}
+                style={{ color: colors.colorText }}
+                defaultValue={body}
+                onInput = {() => autoGrow(textAreaRef)}
+            />
         </div>
-        </div>
-    );
+    )
 };
 
-export default NoteCard
+export default NoteCard;
