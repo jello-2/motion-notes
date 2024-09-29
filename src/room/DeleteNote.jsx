@@ -1,16 +1,16 @@
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../Firebase';
 
-const deleteWidget = async (roomId, noteId) => {
+const deleteNote = async (roomId, noteId) => {
   try {
     const noteDocRef = doc(db, roomId, noteId);
     await deleteDoc(noteDocRef);
 
-    console.log("Widget deleted successfully!");
+    console.log("Note deleted successfully!");
 
   } catch (error) {
-    console.error("Error deleting widget: ", error);
+    console.error("Error deleting note: ", error);
   }
 };
 
-export default deleteWidget;
+export default deleteNote;
