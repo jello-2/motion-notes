@@ -7,12 +7,11 @@ import { setNewOffset, setZIndex, gridsnap } from '../utils.js';
 
 const colorPresets = [
     { name: 'Soft Peach', header: '#FFDAB9', body: '#FFF0E6', text: '#8B4513' },
-    { name: 'Mint Dream', header: '#98FB98', body: '#F0FFF0', text: '#006400' },
+    { name: 'Mint Dream', header: '#c9e7d2', body: '#F0FFF0', text: '#006400' },
     { name: 'Lavender Mist', header: '#E6E6FA', body: '#F8F8FF', text: '#4B0082' },
-    { name: 'Lemon Chiffon', header: '#FFFACD', body: '#FAFAD2', text: '#8B8B00' },
+    { name: 'Lemon Chiffon', header: '#f9ebbe', body: '#FAFAD2', text: '#8B8B00' },
     { name: 'Baby Blue', header: '#ADD8E6', body: '#F0F8FF', text: '#00008B' },
     { name: 'Blush Pink', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
-    { name: 'n', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
 ];
 
 const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
