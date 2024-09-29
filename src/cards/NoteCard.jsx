@@ -1,21 +1,21 @@
-import {autoGrow} from '../utils.js'
-import {useRef, useEffect} from "react";
+import { autoGrow } from '../utils.js';
+import { useRef, useEffect } from "react";
 import updateWidget from '../room/UpdateWidget.jsx';
 import { useParams } from 'react-router-dom';
+import ask from '../Gemini.js';
 
+const NoteCard = ({ note, prompt }) => {
+    const { roomId } = useParams();
 
-const NoteCard = ({ note }) => {
-    const {roomId} = useParams();
-
-    const textAreaRef = useRef(null)
+    const textAreaRef = useRef(null);
     const keyUpTimer = useRef(null);
 
-    const colors = note.colors
-    const body = note.body
+    const colors = note.colors;
+    const body = note.body;
 
-    useEffect(() =>{
-        autoGrow(textAreaRef)
-    })
+    useEffect(() => {
+        autoGrow(textAreaRef);
+    }, []);
 
     const handleKeyUp = async () => {
         if (keyUpTimer.current) {
@@ -35,18 +35,28 @@ const NoteCard = ({ note }) => {
         }
     };
 
+    const handleSummarize = async () => {
+        console.log(`Summarize and format this text for me: ${textAreaRef.current.value}`);
+        const formattedText = await ask(`Summarize and format this text for me: ${textAreaRef.current.value}`);
+        textAreaRef.current.value = formattedText; // Update the text area with the summarized text
+        saveData("body", formattedText); // Save the formatted text to the backend
+    };
 
     return (
-        <div className = "card-body">
+        <div className="card-body">
             <textarea
                 onKeyUp={handleKeyUp}
-                ref = {textAreaRef}
+                ref={textAreaRef}
                 style={{ color: colors.colorText }}
                 defaultValue={body}
-                onInput = {() => autoGrow(textAreaRef)}
+                onInput={() => autoGrow(textAreaRef)}
             />
+            <button onClick={handleSummarize} className="summarize-button flex flex-row">
+                Motion Ask |
+                <img src='/motion.png' className='w-5 h-5'></img>
+            </button>
         </div>
-    )
+    );
 };
 
 export default NoteCard;

@@ -10,6 +10,7 @@ const templateImages = [
     { name: 'Aurora', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fsimple-clean.jpg?alt=media&token=85b3b9da-8b28-4421-84e8-4bf7dd9439ad' },
     { name: 'Retro', url: 'https://wallpapercave.com/wp/wp2757967.gif' },
     { name: 'Sugoi', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fcar.gif?alt=media&token=4b3ccbfd-cbbd-4ad4-a354-2949a0792200' },
+    { name: 'Neon Rider', url: 'https://images-ext-1.discordapp.net/external/u3_B45lIbuOFNuzaHVZsKD-2VWGzpQVO_HNHpwgVRYM/https/media1.tenor.com/m/UiX3cAoTV8YAAAAd/retrowave.gif?width=960&height=540' },
     { name: 'Kawaii ≽^•⩊•^≼', url: 'https://wallpaperaccess.com/full/8278309.gif' },
 ];
     
