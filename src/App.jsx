@@ -17,16 +17,20 @@ function HomePage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-            <header className="container mx-auto px-4 py-6 flex justify-start items-center">
-                <img src='/motion.png' className='h-10 w-10'></img>
-                <div className="text-2xl font-bold">Notes Pro Max+</div>
-                <nav className="space-x-4">
+            <header className="container mx-auto px-8 py-6 flex justify-between items-center">
+                
+                <div className='flex flex-row'>
+                    <img src='/motion.png' className='h-10 w-10'></img>
+                    <div className=" ml-8 text-2xl font-bold">Motion</div>
+                </div>
+
+                <nav className="space-x-8">
                     <a href="#features" className="hover:text-blue-400 transition-colors">Features</a>
                     <a href="#about" className="hover:text-blue-400 transition-colors">About</a>
                 </nav>
             </header>
 
-            <main className="container mx-auto px-4 py-12">
+            <main className="container mx-auto px-16 py-12">
                 <section className="text-center mb-16">
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
                         Elevate Your Notes
@@ -75,9 +79,9 @@ function HomePage() {
                 </section>
 
                 <section id="about" className="text-center">
-                    <h2 className="text-3xl font-bold mb-4">About Notes Pro Max+</h2>
+                    <h2 className="text-3xl font-bold mb-4">About Motion</h2>
                     <p className="text-gray-300 max-w-2xl mx-auto">
-                        We're revolutionizing the way you take and manage notes. With cutting-edge features and a sleek interface, Notes Pro Max+ is your ultimate productivity companion.
+                        We're revolutionizing the way you take and manage notes. With cutting-edge features and a sleek interface, Motion is your ultimate productivity companion.
                     </p>
                 </section>
             </main>
