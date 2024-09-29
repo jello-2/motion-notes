@@ -13,6 +13,7 @@ const colorPresets = [
     { name: 'Lemon Chiffon', header: '#f9ebbe', body: '#FAFAD2', text: '#8B8B00' },
     { name: 'Baby Blue', header: '#ADD8E6', body: '#F0F8FF', text: '#00008B' },
     { name: 'Blush Pink', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
+    { name: 'Sandy', header: '#d7be8b', body: '#e8dcc9', text: '#c09d4d' },
 
 // Earthy/Neutral Colors
     { name: 'Nature', header: '#8b9a71', body: '#ced2ba', text: '#4a6f28' },
