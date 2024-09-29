@@ -4,10 +4,10 @@ import { storage } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const templateImages = [
-    { name: 'Forest', url: 'https://example.com/forest.jpg' },
-    { name: 'Beach', url: 'https://example.com/beach.jpg' },
-    { name: 'Mountain', url: 'https://example.com/mountain.jpg' },
-    { name: 'City', url: 'https://example.com/city.jpg' },
+    { name: 'Night', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fnighttime%20new.gif?alt=media&token=2c8484c2-b4be-4e30-a34a-1d3c8d926c37' },
+    { name: 'Cutesy', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fcutesty.gif?alt=media&token=3494de0d-d6bc-4032-9bf9-3f51bad21a3a' },
+    { name: 'Nature', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fnature.png?alt=media&token=ab3f4849-c26c-4976-8d95-db69f4deb29d' },
+    { name: 'Aurora', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fsimple-clean.jpg?alt=media&token=85b3b9da-8b28-4421-84e8-4bf7dd9439ad' },
 ];
 
 const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgroundUrl, currentDarkness }) => {
@@ -40,15 +40,15 @@ const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgrou
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                <div className="flex justify-between items-center mb-4">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-[32rem]">
+                <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-bold">Settings</h2>
                     <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
                         <X size={24} />
                     </button>
                 </div>
-                <div className="space-y-4">
-                    <div className="flex space-x-2">
+                <div className="space-y-6">
+                    <div className="flex space-x-4">
                         <div className="flex-1">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Upload Background Image
@@ -66,7 +66,7 @@ const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgrou
                             </label>
                             <select
                                 onChange={handleTemplateChange}
-                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md text-black"
                             >
                                 <option value="">Select template</option>
                                 {templateImages.map((template) => (
