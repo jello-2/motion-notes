@@ -11,8 +11,6 @@
 
 body {
   overflow: visible; /* Ensure body allows overflow */
-  height: 100vh; /* Set a height if needed */
-  margin: 0; /* Remove default margin */
 }
 
 

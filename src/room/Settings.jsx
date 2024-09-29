@@ -8,6 +8,8 @@ const templateImages = [
     { name: 'Cutesy', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fcutesty.gif?alt=media&token=3494de0d-d6bc-4032-9bf9-3f51bad21a3a' },
     { name: 'Nature', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fnature.png?alt=media&token=ab3f4849-c26c-4976-8d95-db69f4deb29d' },
     { name: 'Aurora', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fsimple-clean.jpg?alt=media&token=85b3b9da-8b28-4421-84e8-4bf7dd9439ad' },
+    { name: 'Retro', url: 'https://wallpapercave.com/wp/wp2757967.gif' },
+    { name: 'Kawaii ≽^•⩊•^≼', url: 'https://wallpaperaccess.com/full/8278309.gif' },
 ];
     
 const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgroundUrl, currentDarkness }) => {
