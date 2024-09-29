@@ -13,6 +13,7 @@ const colorPresets = [
     { name: 'Lemon Chiffon', header: '#f9ebbe', body: '#FAFAD2', text: '#8B8B00' },
     { name: 'Baby Blue', header: '#ADD8E6', body: '#F0F8FF', text: '#00008B' },
     { name: 'Blush Pink', header: '#FFB6C1', body: '#FFF0F5', text: '#8B008B' },
+    { name: 'Sandy', header: '#d7be8b', body: '#e8dcc9', text: '#c09d4d' },
 
 // Earthy/Neutral Colors
     { name: 'Nature', header: '#8b9a71', body: '#ced2ba', text: '#4a6f28' },
@@ -25,8 +26,10 @@ const colorPresets = [
     { name: 'Retro Aqua', header: '#009B77', body: '#66C8B8', text: '#006B4E' },
     { name: 'Coral Red', header: '#D7534E', body: '#F2A1A0', text: '#9B3B3B' },
     { name: 'Olive Green', header: '#5B6E41', body: '#A8B84D', text: '#3B4E2C' },
+    { name: 'Soft White', header: '#FFFFFF', body: '#F8F8F8', text: '#9B59B6' },
     { name: 'Peach', header: '#FF6F61', body: '#FFB7A0', text: '#C54E43' },
     { name: 'Slate', header: '#6A6A6A', body: '#C7C7C7', text: '#3C3C3C' },
+    { name: 'Bright purple', header: '#d896ff', body: '#efbbff', text: '#800080' },
 
 ];
 
