@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NoteCard from '../cards/NoteCard';
-
+import TimerCard from '../cards/TimerCard';
 import { useParams } from 'react-router-dom';
 import fetchRoomData from './FetchRoom';
 import addWidget from './AddWidget';
@@ -10,8 +10,10 @@ import { Share2, Tag, Clock, Music, PenTool, Settings, ChevronRight, ChevronLeft
 import { collection, onSnapshot, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 
-import SpotifyCard from '../cards/SpotifyCard';
-import Card from '../cards/TemplateCard';
+import Card from '../cards/Card';
+import MusicCard from '../cards/MusicCard';
+import QuoteCard from '../cards/QuoteCard';
+
 
 const Room = () => {
     const { roomId } = useParams();
@@ -99,13 +101,13 @@ const Room = () => {
                 <div className="relative z-10">
                     {roomData.map((widget) => {
                         if (widget.type === 'timer') {
-                            return;
+                            return <Card key={widget.id} widget={widget} BodyComponent={TimerCard} onDelete={handleDelete} min_width={400}/>;
                         } else if (widget.type === 'player') {
-                            return <Card key={widget.id} widget={widget} BodyComponent={SpotifyCard} onDelete={handleDelete} min_width={400}/>;
+                            return <Card key={widget.id} widget={widget} BodyComponent={MusicCard} onDelete={handleDelete} min_width={400}/>;
                         } else if (widget.type === 'note') {
                             return <Card key={widget.id} widget={widget} BodyComponent={() => <NoteCard note={widget} />} onDelete={handleDelete} min_width={160} />;
                         } else if (widget.type === 'quote') {
-                            return;
+                            return <Card key={widget.id} widget={widget} BodyComponent={QuoteCard} onDelete={handleDelete} min_width={400} />;
                         }
                     })}
                 </div>
