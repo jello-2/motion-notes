@@ -9,7 +9,7 @@ const templateImages = [
     { name: 'Nature', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fnature.png?alt=media&token=ab3f4849-c26c-4976-8d95-db69f4deb29d' },
     { name: 'Aurora', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fsimple-clean.jpg?alt=media&token=85b3b9da-8b28-4421-84e8-4bf7dd9439ad' },
 ];
-
+    
 const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgroundUrl, currentDarkness }) => {
     const [darkness, setDarkness] = useState(currentDarkness);
 
@@ -39,7 +39,7 @@ const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgrou
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-8 rounded-lg shadow-lg w-[32rem]">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-bold">Settings</h2>
