@@ -6,7 +6,6 @@ const defaultWidgets = {
     type: 'note',
     body: JSON.stringify('Amazing ideas here...'),
     colors: JSON.stringify({
-      id: "color-blue",
       colorHeader: "#9BD1DE",
       colorBody: "#A6DCE9",
       colorText: "#18181A",
@@ -23,7 +22,6 @@ const defaultWidgets = {
       seconds: 0,
     }),
     colors: JSON.stringify({
-      id: "color-green",
       colorHeader: "#A5D6A7",
       colorBody: "#C8E6C9",
       colorText: "#18181A",
@@ -40,7 +38,6 @@ const defaultWidgets = {
       seconds: 0,
     }),
     colors: JSON.stringify({
-      id: "color-green",
       colorHeader: "#CAA07F",
       colorBody: "#E6Ba92",
       colorText: "#000000",
@@ -52,7 +49,6 @@ const defaultWidgets = {
     type: 'quote',
     body: JSON.stringify('This is a quote.'),
     colors: JSON.stringify({
-      id: "color-green",
       colorHeader: "#CAA07F",
       colorBody: "#E6Ba92",
       colorText: "#000000",
@@ -64,7 +60,6 @@ const defaultWidgets = {
     type: 'todo',
     body: JSON.stringify('This is a quote.'),
     colors: JSON.stringify({
-      id: "color-green",
       colorHeader: "#CAA07F",
       colorBody: "#E6Ba92",
       colorText: "#000000",

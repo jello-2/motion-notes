@@ -5,6 +5,7 @@ import { Sliders, Trash2 } from 'react-feather';
 import { useParams } from 'react-router-dom';
 import updateWidget from '../room/UpdateWidget.jsx';
 import deleteNote from '../room/DeleteWidget.jsx';
+import ChangeColor from '../room/ChangeColor.jsx'
 
 const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     const [width, setWidth] = useState(widget.width)
@@ -24,6 +25,11 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
         onDelete(widget.id); // Call the onDelete callback to update Room state
         await deleteNote(roomId, widget.id);
     };
+
+    const handleColor = async() =>{
+        ChangeColor(roomId,widget.id);
+        return;
+    }
 
 
     const mouseDown = (e) =>{
@@ -117,7 +123,7 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
                 style = {{backgroundColor:colors.colorHeader}}
             >
                 <div className='flex flex-row'>
-                    <Sliders size={16} color='black' className='m-1' />
+                    <Sliders size={16} color='black' className='m-1' onClick = {handleColor}/>
                     <Trash2 size={16} color='black' className='m-1' onClick={handleDelete} />
                 </div>
             </div>
