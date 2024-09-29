@@ -6,7 +6,7 @@ import fetchRoomData from './FetchRoom';
 import addWidget from './AddWidget';
 import ShareRoom from './ShareRoom';
 import SettingsModal from './Settings';
-import { Share2, Tag, Clock, Music, PenTool, Settings, ChevronRight, ChevronLeft } from 'react-feather';
+import { Share2, Tag, Clock, Music, PenTool, Settings, ChevronRight, ChevronLeft, PlusSquare } from 'react-feather';
 import { collection, onSnapshot, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 
@@ -124,22 +124,16 @@ const Room = () => {
 
     <div className={`flex flex-col items-center space-y-3 bg-white p-2 rounded-r-md shadow-md transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-blue-300 transition-colors" 
-            onClick={() => setShareOpen(prev => !prev)}
+            className="flex items-center w-full p-2 rounded-md hover:bg-teal-300 transition-colors" 
+            onClick={() => { addWidget(roomId, "note"); loadRoomData(); }}
         >
-            <Share2 size={20} color='black' />
+            <PlusSquare size={20} color='black' />
         </button>
         <button 
             className="flex items-center w-full p-2 rounded-md hover:bg-green-300 transition-colors" 
             onClick={() => { addWidget(roomId, "player"); loadRoomData(); }}
         >
             <Music size={20} color='black' />
-        </button>
-        <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-teal-300 transition-colors" 
-            onClick={() => { addWidget(roomId, "note"); loadRoomData(); }}
-        >
-            <Tag size={20} color='black' />
         </button>
         <button 
             className="flex items-center w-full p-2 rounded-md hover:bg-fuchsia-300 transition-colors" 
@@ -158,6 +152,12 @@ const Room = () => {
             onClick={() => setSettingsOpen(true)}
         >
             <Settings size={20} color='black' />
+        </button>
+        <button 
+            className="flex items-center w-full p-2 rounded-md hover:bg-blue-300 transition-colors" 
+            onClick={() => setShareOpen(prev => !prev)}
+        >
+            <Share2 size={20} color='black' />
         </button>
     </div>
 </div>

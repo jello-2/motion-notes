@@ -5,10 +5,11 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const templateImages = [
     { name: 'Night', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fnighttime%20new.gif?alt=media&token=2c8484c2-b4be-4e30-a34a-1d3c8d926c37' },
-    { name: 'Cutesy', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fcutesty.gif?alt=media&token=3494de0d-d6bc-4032-9bf9-3f51bad21a3a' },
+    { name: 'Rain', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fnighttime%20new%20(1).gif?alt=media&token=b8169cd2-07fb-4972-b473-cdba7af169d6' },
     { name: 'Nature', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fnature.png?alt=media&token=ab3f4849-c26c-4976-8d95-db69f4deb29d' },
     { name: 'Aurora', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fsimple-clean.jpg?alt=media&token=85b3b9da-8b28-4421-84e8-4bf7dd9439ad' },
     { name: 'Retro', url: 'https://wallpapercave.com/wp/wp2757967.gif' },
+    { name: 'Sugoi', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fcar.gif?alt=media&token=4b3ccbfd-cbbd-4ad4-a354-2949a0792200' },
     { name: 'Kawaii ≽^•⩊•^≼', url: 'https://wallpaperaccess.com/full/8278309.gif' },
 ];
     

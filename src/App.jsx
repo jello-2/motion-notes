@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import { ChevronRight, Users, Droplet, Layout } from 'react-feather';
 import Room from './room/Room';
 import { motion } from 'framer-motion';
-
+import createRoom from './room/CreateRoom';
 const Button = ({ children, className, ...props }) => (
   <button
     className={`px-6 py-2 rounded-full transition-colors ${className}`}
@@ -80,7 +80,7 @@ function HomePage() {
           </div>
           
           <Button
-            onClick={() => {/* Implement createRoom function */}}
+            onClick={createRoom}
             className="mt-4 bg-purple-400 hover:bg-purple-500 text-white"
           >
             Create New Room
