@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore"; // Import Firestore
 import { getStorage } from "firebase/storage";
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBCO7L-D53GrJ5o1IY36sRP_zzpnx7q--g",
-  authDomain: "notesapp-93454.firebaseapp.com",
-  projectId: "notesapp-93454",
-  storageBucket: "notesapp-93454.appspot.com",
-  messagingSenderId: "515705734270",
-  appId: "1:515705734270:web:489b3f1124db93f431042f",
-  measurementId: "G-8B9PKGF2C4"
+  apiKey: "AIzaSyDb1VzLULLP5JHQ-NWzQGp5AM2igZQDoKY",
+  authDomain: "yvrnotes-77c78.firebaseapp.com",
+  projectId: "yvrnotes-77c78",
+  storageBucket: "yvrnotes-77c78.appspot.com",
+  messagingSenderId: "330609223891",
+  appId: "1:330609223891:web:427fbae0f400f9c12c0c26",
+  measurementId: "G-WB86DLPE4J"
 };
 
 // Initialize Firebase
