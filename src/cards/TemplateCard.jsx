@@ -28,6 +28,7 @@ const colorPresets = [
     { name: 'Olive Green', header: '#5B6E41', body: '#A8B84D', text: '#3B4E2C' },
     { name: 'Peach', header: '#FF6F61', body: '#FFB7A0', text: '#C54E43' },
     { name: 'Slate', header: '#6A6A6A', body: '#C7C7C7', text: '#3C3C3C' },
+    { name: 'Bright purple', header: '#d896ff', body: '#efbbff', text: '#800080' },
 
 ];
 
