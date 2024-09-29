@@ -1,102 +1,126 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ChevronRight } from 'react-feather';
+import { ChevronRight, Users, Droplet, Layout } from 'react-feather';
 import Room from './room/Room';
-import createRoom from "./room/CreateRoom";
+import { motion } from 'framer-motion';
+
+const Button = ({ children, className, ...props }) => (
+  <button
+    className={`px-6 py-2 rounded-full transition-colors ${className}`}
+    {...props}
+  >
+    {children}
+  </button>
+);
+
+const Input = ({ className, ...props }) => (
+  <input
+    className={`w-full px-4 py-2 rounded-full bg-white bg-opacity-50 border border-gray-200 focus:outline-none focus:border-blue-300 transition-colors ${className}`}
+    {...props}
+  />
+);
+
+const FeatureCard = ({ Icon, title, description }) => (
+  <motion.div
+    className="bg-white bg-opacity-50 p-6 rounded-2xl backdrop-blur-sm"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: 'easeOut' }}
+  >
+    <Icon className="w-8 h-8 mb-4 text-blue-400" />
+    <h3 className="text-xl font-semibold mb-2 text-gray-800">{title}</h3>
+    <p className="text-gray-600">{description}</p>
+  </motion.div>
+);
 
 function HomePage() {
-    const [roomCode, setRoomCode] = useState('');
-    const navigate = useNavigate();
+  const [roomCode, setRoomCode] = useState('');
+  const navigate = useNavigate();
 
-    const handleJoinRoom = () => {
-        if (roomCode) {
-            navigate(`/room/${roomCode}`);
-        }
-    };
+  const handleJoinRoom = () => {
+    if (roomCode) {
+      navigate(`/room/${roomCode}`);
+    }
+  };
 
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-            <header className="container mx-auto px-8 py-6 flex justify-between items-center">
-                
-                <div className='flex flex-row'>
-                    <img src='/motion.png' className='h-10 w-10'></img>
-                    <div className=" ml-8 text-2xl font-bold">Motion</div>
-                </div>
-            </header>
-
-            <main className="container mx-auto px-16 py-12">
-                <section className="text-center mb-16">
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-                        Elevate Your Notes
-                    </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 mb-8">
-                        Collaborate, organize, and boost productivity like never before.
-                    </p>
-                    
-                    <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-                        <input
-                            type="text"
-                            placeholder="Enter Room Code"
-                            value={roomCode}
-                            onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-                            className="w-full md:w-64 px-4 py-2 rounded-full bg-white/10 border border-white/20 focus:outline-none focus:border-blue-400"
-                        />
-                        <button
-                            onClick={handleJoinRoom}
-                            className="w-full md:w-auto px-6 py-2 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors flex items-center justify-center"
-                        >
-                            Join Room <ChevronRight className="ml-2" size={20} />
-                        </button>
-                    </div>
-                    
-                    <button
-                        onClick={createRoom}
-                        className="mt-4 px-6 py-2 rounded-full bg-purple-600 hover:bg-purple-700 transition-colors"
-                    >
-                        Create New Room
-                    </button>
-                </section>
-
-                <section className="grid md:grid-cols-3 gap-8 mb-16">
-                    {['Real-Time Collaboration', 'Smart Organization', 'Productivity Boost'].map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            className="p-6 rounded-lg bg-white/5 backdrop-blur-lg"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.2 }}
-                        >
-                            <h3 className="text-xl font-semibold mb-2">{feature}</h3>
-                            <p className="text-gray-400">Experience the power of seamless teamwork and efficiency.</p>
-                        </motion.div>
-                    ))}
-                </section>
-
-                <section id="about" className="text-center">
-                    <h2 className="text-3xl font-bold mb-4">About Motion</h2>
-                    <p className="text-gray-300 max-w-2xl mx-auto">
-                        We're revolutionizing the way you take and manage notes. With cutting-edge features and a sleek interface, Motion is your ultimate productivity companion.
-                    </p>
-                </section>
-            </main>
-
-            <footer className="container mx-auto px-4 py-6 text-center text-gray-500">
-                <p>&copy; 2024 Motion. All rights reserved.</p>
-            </footer>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100 text-gray-800 font-sans">
+      <header className="bg-white bg-opacity-30 backdrop-blur-md p-4 flex justify-between items-center sticky top-0 z-10">
+        <div className='flex items-center space-x-2'>
+          <img src='/motion.png' alt="Motion Logo" className='h-8 w-8' />
+          <span className="text-xl font-semibold bg-clip-text text-black">
+            Motion
+          </span>
         </div>
-    );
+      </header>
+
+        <section className="text-center m-12">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+            Elevate Your Ideas
+          </h1>
+          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+            Capture, collaborate, and create with Motion. 
+            Your thoughts, beautifully organized and infinitely powerful.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <Input
+              type="text"
+              placeholder="Enter Room Code"
+              value={roomCode}
+              onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+              className="sm:w-64"
+            />
+            <Button 
+              onClick={handleJoinRoom}
+              className="bg-blue-400 hover:bg-blue-500 text-white"
+            >
+              Join Room <ChevronRight className="inline ml-2" size={18} />
+            </Button>
+          </div>
+          
+          <Button
+            onClick={() => {/* Implement createRoom function */}}
+            className="mt-4 bg-purple-400 hover:bg-purple-500 text-white"
+          >
+            Create New Room
+          </Button>
+        </section>
+
+        <section className="grid md:grid-cols-3 gap-8 m-12">
+          <FeatureCard 
+            Icon={Users}
+            title="Real-Time Collaboration"
+            description="Collaborate in real-time and sync seamlessly across all your devices."
+          />
+          <FeatureCard 
+            Icon={Droplet}
+            title="Beautiful Color Themes"
+            description="Customize your workspace with beautiful and inspiring color themes."
+          />
+          <FeatureCard 
+            Icon={Layout}
+            title="Minimal & Modern Aesthetic"
+            description="A clean, minimal, and modern design to enhance your productivity."
+          />
+        </section>
+
+      <footer className="bg-white bg-opacity-30 backdrop-blur-md py-6 text-center text-gray-600">
+        <p>&copy; 2024 Motion. Elevate your ideas.</p>
+      </footer>
+    </div>
+  );
 }
 
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/room/:roomId" element={<Room />} />
-            </Routes>
-        </Router>
-    );
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/room/:roomId" element={<Room />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
