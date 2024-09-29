@@ -43,7 +43,7 @@ const QuoteCard = () => {
                     right: '10px',
                     padding: '5px 10px',
                     cursor: 'pointer',
-                    color: 'white',
+                    color: 'black',
                     border: 'none',
                     borderRadius: '5px',
                     fontSize: '14px'

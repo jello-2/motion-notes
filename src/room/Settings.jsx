@@ -3,6 +3,13 @@ import { X } from 'react-feather';
 import { storage } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+const templateImages = [
+    { name: 'Forest', url: 'https://example.com/forest.jpg' },
+    { name: 'Beach', url: 'https://example.com/beach.jpg' },
+    { name: 'Mountain', url: 'https://example.com/mountain.jpg' },
+    { name: 'City', url: 'https://example.com/city.jpg' },
+];
+
 const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgroundUrl, currentDarkness }) => {
     const [darkness, setDarkness] = useState(currentDarkness);
 
@@ -22,6 +29,13 @@ const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgrou
         onBackgroundChange(currentBackgroundUrl, newDarkness);
     };
 
+    const handleTemplateChange = (event) => {
+        const selectedUrl = event.target.value;
+        if (selectedUrl) {
+            onBackgroundChange(selectedUrl, darkness);
+        }
+    };
+
     if (!isOpen) return null;
 
     return (
@@ -34,17 +48,36 @@ const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgrou
                     </button>
                 </div>
                 <div className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Upload Background Image
-                        </label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileUpload}
-                            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                        />
+                    <div className="flex space-x-2">
+                        <div className="flex-1">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Upload Background Image
+                            </label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileUpload}
+                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Template Images
+                            </label>
+                            <select
+                                onChange={handleTemplateChange}
+                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            >
+                                <option value="">Select template</option>
+                                {templateImages.map((template) => (
+                                    <option key={template.name} value={template.url}>
+                                        {template.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                             Background Darkness: {(darkness * 100).toFixed(0)}%

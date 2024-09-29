@@ -16,6 +16,10 @@ const colorPresets = [
     { name: 'Cloudy', header: '#A2A2A2', body: '#dcdcdc', text: '#000000' },
     { name: 'Slate Gray', header: '#6D7F9A', body: '#B7C9D8', text: '#2F4F66' },
     { name: 'Soft Lavender', header: '#8B7FB0', body: '#D3C9E7', text: '#4E3D66' },
+    { name: 'Stone', header: '#7D7D7D', body: '#E1E1E1', text: '#4B4B4B' },
+    { name: 'Ash', header: '#B0B0B0', body: '#F0F0F0', text: '#7A7A7A' },
+    { name: 'Fog', header: '#A9A9A9', body: '#D8D8D8', text: '#6E6E6E' },
+    { name: 'Slate', header: '#6A6A6A', body: '#C7C7C7', text: '#3C3C3C' },
 ];
 
 const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
