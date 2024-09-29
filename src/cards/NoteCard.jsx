@@ -37,7 +37,7 @@ const NoteCard = ({ note, prompt }) => {
 
     const handleSummarize = async () => {
         console.log(`Summarize and format this text for me: ${textAreaRef.current.value}`);
-        const formattedText = await ask(`Answer this prompt for me professional and concisely, briefly like a master in whatever field i may have a question in, no whitespace at the end, dont include any text formatting. Start your reply with: Here's what I think: ${textAreaRef.current.value}`);
+        const formattedText = await ask(`Answer this prompt for me concisely without whitespace and without asterisks. Format your brief response with newlines. Start your reply with: Here's what I think: ${textAreaRef.current.value}`);
         textAreaRef.current.value = formattedText;
         saveData("body", formattedText);
         autoGrow(textAreaRef); // Add this line to trigger autogrow after updating content
