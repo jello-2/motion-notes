@@ -12,7 +12,7 @@ const defaultWidgets = {
       colorText: "#18181A",
     }),
     position: JSON.stringify({ x: 305, y: 110 }),
-    width: "400",
+    width: "160",
   },
   timer: {
     type: 'timer',
@@ -46,7 +46,7 @@ const defaultWidgets = {
       colorText: "#000000",
     }),
     position: JSON.stringify({ x: 200, y: 100 }),
-    width: "300",
+    width: "400",
   },
   quote: {
     type: 'quote',
