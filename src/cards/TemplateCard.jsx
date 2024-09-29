@@ -1,7 +1,7 @@
 import {setNewOffset, setZIndex, gridsnap} from '../utils.js'
 import {useRef, useState} from "react";
 
-import { Trash2 } from 'react-feather';
+import { Sliders, Trash2 } from 'react-feather';
 import { useParams } from 'react-router-dom';
 import updateWidget from '../room/UpdateWidget.jsx';
 import deleteNote from '../room/DeleteWidget.jsx';
@@ -116,7 +116,8 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
                 className = "card-header" 
                 style = {{backgroundColor:colors.colorHeader}}
             >
-                <div>
+                <div className='flex flex-row'>
+                    <Sliders size={16} color='black' className='m-1' />
                     <Trash2 size={16} color='black' className='m-1' onClick={handleDelete} />
                 </div>
             </div>

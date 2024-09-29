@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NoteCard from '../cards/NoteCard';
-import TimerCard from '../cards/TimerCard';
+
 import { useParams } from 'react-router-dom';
 import fetchRoomData from './FetchRoom';
 import addWidget from './AddWidget';
@@ -11,9 +11,6 @@ import { collection, onSnapshot, doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '../Firebase';
 
 import Card from '../cards/TemplateCard';
-import MusicCard from '../cards/MusicCard';
-import QuoteCard from '../cards/QuoteCard';
-
 
 const Room = () => {
     const { roomId } = useParams();
