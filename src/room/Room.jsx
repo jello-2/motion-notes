@@ -88,13 +88,13 @@ const Room = () => {
                     backgroundPosition: 'center',
                 }}
             >
-                {/* Overlay div for darkness */}
-                <div 
-                    className="absolute inset-0"
-                    style={{
-                        backgroundColor: `rgba(0, 0, 0, ${backgroundDarkness})`,
-                    }}
-                />
+{/* Overlay div for darkness */}
+            <div
+                className="fixed inset-0 pointer-events-none"
+                style={{
+                    backgroundColor: `rgba(0, 0, 0, ${backgroundDarkness})`,
+                }}
+            />
 
 
                 {/* Content */}
