@@ -4,7 +4,7 @@ export const setNewOffset = (card, mouseMoveDir = { x: 0, y: 0 }) => {
         const offsetTop = card.offsetTop - mouseMoveDir.y;
     
         return {
-            x: offsetLeft < 0 ? 0 : offsetLeft,
+            x: offsetLeft < 0 ? 0 : offsetLeft, //change for side margins when impl sidebar
             y: offsetTop < 0 ? 0 : offsetTop,
         };
     }

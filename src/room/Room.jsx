@@ -107,7 +107,7 @@ const Room = () => {
                         } else if (widget.type === 'note') {
                             return <Card key={widget.id} widget={widget} BodyComponent={() => <NoteCard note={widget} />} onDelete={handleDelete} min_width={160} />;
                         } else if (widget.type === 'motionask'){
-                            return <Card key={widget.id} widget={widget} BodyComponent={() => <MotionAskCard note={widget} />} onDelete={handleDelete} min_width={160}/>;
+                            return <Card key={widget.id} widget={widget} BodyComponent={() => <MotionAskCard note={widget} />} onDelete={handleDelete} min_width={210}/>;
                         } else if (widget.type === 'quote') {
                             return <Card key={widget.id} widget={widget} BodyComponent={QuoteCard} onDelete={handleDelete} min_width={400} />;
                         }

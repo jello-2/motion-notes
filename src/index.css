@@ -88,9 +88,9 @@ textarea:focus {
 .resize-handle{
   position: absolute;
   right: 0;
-  top: 0;
+  top: 34px;
   bottom: 0;
-  width: 15px;
+  width: 20px;
   cursor: ew-resize;
   background-color: transparent;
 }

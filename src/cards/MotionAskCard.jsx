@@ -4,7 +4,7 @@ import updateWidget from '../room/UpdateWidget.jsx';
 import { useParams } from 'react-router-dom';
 import ask from '../Gemini.js';
 
-const NoteCard = ({ note, prompt }) => {
+const MotionAskCard = ({ note, prompt }) => {
     const { roomId } = useParams();
 
     const textAreaRef = useRef(null);
@@ -64,4 +64,4 @@ const NoteCard = ({ note, prompt }) => {
     );
 };
 
-export default NoteCard;
+export default MotionAskCard;
