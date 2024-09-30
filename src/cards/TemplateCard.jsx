@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Sliders, Trash2 } from 'react-feather';
 import { useParams } from 'react-router-dom';
 import updateWidget from '../room/UpdateWidget.jsx';
@@ -33,11 +33,24 @@ const colorPresets = [
 
 ];
 
+const scrollbarHideStyle = `
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+`;
+
+
 const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     const [width, setWidth] = useState(widget.width);
     const [position, setPosition] = useState(widget.position);
     const [colors, setColors] = useState(widget.colors);
     const [showColorPicker, setShowColorPicker] = useState(false);
+    const [colorsPerRow, setColorsPerRow] = useState(2);
+    const colorPickerRef = useRef(null);
 
     const { roomId } = useParams();
 
@@ -134,6 +147,19 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
             console.error(error);
         }
     };
+    
+    useEffect(() => {
+        if (showColorPicker && colorPickerRef.current) {
+            const colorPickerWidth = colorPickerRef.current.offsetWidth;
+            const colorBoxWidth = 100; // Fixed width of a color box
+            const gap = 8; // Gap between color boxes (2 * 4px from gap-2)
+            const newColorsPerRow = Math.floor((colorPickerWidth + gap) / (colorBoxWidth + gap));
+            setColorsPerRow(Math.max(2, newColorsPerRow));
+        }
+
+        
+    }, [showColorPicker, width]);
+
 
     return (
         <div ref={cardRef}
@@ -161,17 +187,26 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
             </div>
             
             {showColorPicker && (
-                <div className="absolute top-full left-0 mt-2 p-2 bg-white border rounded shadow-lg z-10">
-                    <div className="grid grid-cols-2 gap-2">
+                <div 
+                    ref={colorPickerRef}
+                    className="absolute top-full pl-3 left-0 mt-2 p-2 bg-white border rounded shadow-lg z-10 h-48 overflow-y-auto no-scrollbar"
+                    style={{ width: `${width}px` }}
+                >
+                    <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${colorsPerRow}, minmax(0, 1fr))` }}>
                         {colorPresets.map((preset, index) => (
                             <button
                                 key={index}
                                 onClick={() => handleColorChange(preset)}
                                 className="flex flex-col items-center p-2 rounded transition-transform hover:scale-105"
-                                style={{ backgroundColor: preset.body, color: preset.text }}
+                                style={{ 
+                                    backgroundColor: preset.body, 
+                                    color: preset.text,
+                                    width: '100px',
+                                    height: '60px'
+                                }}
                             >
                                 <div className="w-full h-6 mb-1 rounded" style={{ backgroundColor: preset.header }}></div>
-                                <span className="text-xs">{preset.name}</span>
+                                <span className="text-xs overflow-hidden whitespace-nowrap text-ellipsis w-full text-center">{preset.name}</span>
                             </button>
                         ))}
                     </div>
@@ -184,5 +219,6 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
         </div>
     );
 };
+
 
 export default Card;
