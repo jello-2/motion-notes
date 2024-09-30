@@ -116,8 +116,8 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
 
         newWidth = gridsnap(newWidth,20)
 
-        newWidth = Math.min(Math.max(newWidth,min_width),600) - 5
-        setWidth(Math.min(Math.max(newWidth,min_width),600) - 5)
+        newWidth = Math.min(Math.max(newWidth,min_width),800) - 5 //max size
+        setWidth(Math.min(Math.max(newWidth,min_width),800) - 5)
 
         if (Math.abs(newWidth-width) > 10){
             saveData("width", newWidth);

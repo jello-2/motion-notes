@@ -31,7 +31,7 @@ const defaultWidgets = {
       seconds: 0,
     },
     position: { x: 200, y: 100 },
-    width: 300,
+    width: 400,
   },
   player: {
     type: 'player',
@@ -48,7 +48,7 @@ const defaultWidgets = {
     type: 'quote',
     body: 'This is a quote.',
     position: { x: 200, y: 100 },
-    width: 300,
+    width: 400,
   },
   todo: {
     type: 'todo',

@@ -4,6 +4,7 @@ import updateWidget from '../room/UpdateWidget.jsx';
 import { useParams } from 'react-router-dom';
 
 const NoteCard = ({ note}) => {
+    
     const { roomId } = useParams();
 
     const textAreaRef = useRef(null);
