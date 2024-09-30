@@ -33,16 +33,6 @@ const colorPresets = [
 
 ];
 
-const scrollbarHideStyle = `
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-`;
-
 
 const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     const [width, setWidth] = useState(widget.width);
@@ -57,7 +47,6 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     const cardRef = useRef(null);
     const isResizing = useRef(false);
 
-    let dragStartPosX = 0;
     let mouseStartPos = { x: 0, y: 0 };
 
     const handleDelete = async () => {
@@ -150,16 +139,15 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     
     useEffect(() => {
         if (showColorPicker && colorPickerRef.current) {
-            const colorPickerWidth = colorPickerRef.current.offsetWidth;
-            const colorBoxWidth = 100; // Fixed width of a color box
-            const gap = 8; // Gap between color boxes (2 * 4px from gap-2)
+            const colorPickerWidth = colorPickerRef.current.offsetWidth - 16; // Subtract padding
+            const colorBoxWidth = 80; // Fixed width of a color box
+            const gap = 8; // Gap between color boxes
             const newColorsPerRow = Math.floor((colorPickerWidth + gap) / (colorBoxWidth + gap));
             setColorsPerRow(Math.max(2, newColorsPerRow));
         }
-
-        
     }, [showColorPicker, width]);
 
+    
 
     return (
         <div ref={cardRef}
@@ -189,20 +177,31 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
             {showColorPicker && (
                 <div 
                     ref={colorPickerRef}
-                    className="absolute top-full pl-3 left-0 mt-2 p-2 bg-white border rounded shadow-lg z-10 h-48 overflow-y-auto no-scrollbar"
-                    style={{ width: `${width}px` }}
+                    className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg z-10 h-48 overflow-y-auto no-scrollbar" //change to noscrollbar
+                    style={{ 
+                        width: `${width}px`,
+                        padding: '8px',
+                    }}
                 >
-                    <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${colorsPerRow}, minmax(0, 1fr))` }}>
+                    <div 
+                        className="grid gap-3" 
+                        style={{ 
+                            gridTemplateColumns: `repeat(${colorsPerRow}, minmax(0, 1fr))`,
+                            width: '100%',
+                            justifyItems: "center",
+                        }}
+                    >
                         {colorPresets.map((preset, index) => (
                             <button
                                 key={index}
                                 onClick={() => handleColorChange(preset)}
-                                className="flex flex-col items-center p-2 rounded transition-transform hover:scale-105"
+                                className="flex flex-col items-center justify-center rounded transition-transform hover:scale-105"
                                 style={{ 
                                     backgroundColor: preset.body, 
                                     color: preset.text,
-                                    width: '100px',
-                                    height: '60px'
+                                    width: '80px',
+                                    height: '50px',
+                                    padding: '4px',
                                 }}
                             >
                                 <div className="w-full h-6 mb-1 rounded" style={{ backgroundColor: preset.header }}></div>
