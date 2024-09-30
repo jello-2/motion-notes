@@ -2,8 +2,9 @@ import { autoGrow } from '../utils.js';
 import { useRef, useEffect } from "react";
 import updateWidget from '../room/UpdateWidget.jsx';
 import { useParams } from 'react-router-dom';
+import ask from '../Gemini.js';
 
-const NoteCard = ({ note}) => {
+const NoteCard = ({ note, prompt }) => {
     const { roomId } = useParams();
 
     const textAreaRef = useRef(null);
@@ -34,6 +35,13 @@ const NoteCard = ({ note}) => {
         }
     };
 
+    const handleSummarize = async () => {
+        console.log(`Summarize and format this text for me: ${textAreaRef.current.value}`);
+        const formattedText = await ask(`Answer this prompt for me concisely without whitespace and without asterisks. Format your brief response with newlines. Start your reply with: Here's what I think: ${textAreaRef.current.value}`);
+        textAreaRef.current.value = formattedText;
+        saveData("body", formattedText);
+        autoGrow(textAreaRef); // Add this line to trigger autogrow after updating content
+    };
 
     return (
         <div className="card-body flex flex-col items-center">
@@ -45,6 +53,13 @@ const NoteCard = ({ note}) => {
                 onInput={() => autoGrow(textAreaRef)}
                 className="w-full mb-4 p-2 border rounded-md"
             />
+            <button 
+                onClick={handleSummarize} 
+                className="motion-ask-button flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition-colors duration-300"
+            >
+                <span className="mr-2">Motion Ask</span>
+                <img src='/motion.png' alt="Motion icon" className='w-5 h-5' />
+            </button>
         </div>
     );
 };

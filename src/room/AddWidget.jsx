@@ -56,6 +56,12 @@ const defaultWidgets = {
     position: { x: 200, y: 100 },
     width: 300,
   },
+  motionask: {
+    type: 'motionask',
+    body: 'Ask away!',
+    position: { x: 200, y: 100 },
+    width: 210,
+  },
 };
 
 const addWidget = async (roomCode, widgetType) => {
