@@ -13,10 +13,10 @@ function generateRoomCode() {
 const createRoom = async () => {
     const roomCode = generateRoomCode();
     try {
-        addWidget(roomCode, 'note');
+        await addWidget(roomCode, "note");
         console.log(`Room created with collection: ${roomCode}`);
         window.location.href = `/room/${roomCode}`;
-        
+
     } catch (e) {
         console.error("Error creating room: ", e);
     }
