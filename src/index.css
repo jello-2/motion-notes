@@ -4,57 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer utilities {
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+.container {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
 }
-
-:root {
-  line-height: 1.5;
-  font-weight: 400;
+.container::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 body {
-  font-family: "Montserrat", sans-serif !important;
-  overflow: visible; /* Ensure body allows overflow */
+  font-family: "Montserrat", sans-serif;
+  overflow: auto; /* Ensure body allows overflow */
 }
-
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  transition: transform 0.2s;
-}
-
-.glass-card:hover {
-  transform: translateY(-5px);
-}
-
-.spinner {
-  animation: spin 1s linear infinite; /* Adjust duration as needed */
-}
-
-@keyframes spin {
-  0% {
-      transform: rotate(0deg);
-  }
-  100% {
-      transform: rotate(-360deg);
-  }
-}
-
 
 
 /*<----card settings for notes----> */
