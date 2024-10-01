@@ -56,14 +56,9 @@ const MotionAskCard = ({ note, prompt }) => {
     const handleSummarize = async () => {
         setIsLoading(true);
         try {
-            const aiResponse = await ask(content);
-            
-            const processedResponse = aiResponse.split('\n').map(line => 
-                line.trim().startsWith('AI:') ? `<ai>${line.substring(3).trim()}</ai>` : line
-            ).join('\n');
-
-            setContent(processedResponse);
-            saveData("body", processedResponse);
+            const response = await ask(content);
+            setContent(response);
+            saveData("body", response);
         } catch (error) {
             console.error("Error in summarization:", error);
         } finally {
@@ -99,20 +94,18 @@ const MotionAskCard = ({ note, prompt }) => {
             ) : (
                 <div 
                     ref={formattedViewRef}
-                    className="w-full p-2 border rounded-md cursor-text"
+                    className="w-full p-2 rounded-md cursor-text"
                     onClick={startEditing}
                     style={{ minHeight: '100px', overflow: 'hidden' }}
                 >
-                    <ReactMarkdown
-                        components={{
-                            ai: ({node, ...props}) => <span style={{color: colors.colorHighlight}} {...props} />
-                        }}
-                    >
+                    <ReactMarkdown>
                         {content}
                     </ReactMarkdown>
                 </div>
             )}
-            <div className="flex justify-end w-full mt-4">
+
+
+            <div className="flex justify-center w-full mt-4">
                 <button 
                     onClick={handleSummarize} 
                     disabled={isLoading}
