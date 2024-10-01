@@ -48,6 +48,7 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     const isResizing = useRef(false);
 
     let mouseStartPos = { x: 0, y: 0 };
+    let dragStartPosX = 0;
 
     const handleDelete = async () => {
         onDelete(widget.id);
@@ -128,13 +129,9 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
         isResizing.current = false;
     };
 
-    const saveData = async (key, value) => {
+    const saveData = (key, value) => {
         const payload = { [key]: JSON.stringify(value) };
-        try {
-            await updateWidget(roomId, widget.id, payload);
-        } catch (error) {
-            console.error(error);
-        }
+        updateWidget(roomId, widget.id, payload);
     };
     
     useEffect(() => {
