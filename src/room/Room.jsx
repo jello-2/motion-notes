@@ -71,8 +71,8 @@ const Room = () => {
 
 
     const buttons = [
-        { icon: HelpCircle, onClick: () => { addWidget(roomId, "motionask"); loadRoomData(); }, label: "Ask Motion" },
         { icon: PlusSquare, onClick: () => { addWidget(roomId, "note"); loadRoomData(); }, label: "Add Sticky Note" },
+        { icon: HelpCircle, onClick: () => { addWidget(roomId, "motionask"); loadRoomData(); }, label: "Ask Motion" },
         { icon: Music, onClick: () => { addWidget(roomId, "player"); loadRoomData(); }, label: "Add Music Player" },
         { icon: PenTool, onClick: () => { addWidget(roomId, "quote"); loadRoomData(); }, label: "Add Quote" },
         { icon: Clock, onClick: () => { addWidget(roomId, "timer"); loadRoomData(); }, label: "Add Timer" },
