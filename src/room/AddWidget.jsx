@@ -36,11 +36,7 @@ const defaultWidgets = {
   player: {
     type: 'player',
     body: 'This is a player.',
-    time: {
-      hours: 0,
-      minutes: 30,
-      seconds: 0,
-    },
+    playlistUrl: '',
     position: { x: 200, y: 100 },
     width: 400,
   },

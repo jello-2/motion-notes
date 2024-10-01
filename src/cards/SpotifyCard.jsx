@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useParams } from 'react-router-dom';
+import updateWidget from "../room/UpdateWidget";
 
-const SpotifyCard = () => {
-  const [playlistUrl, setPlaylistUrl] = useState("https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M");
+const SpotifyCard = ({ player }) => {
+  const { roomId } = useParams();
+
+  const [playlistUrl, setPlaylistUrl] = useState(player.playlistUrl);
   const [searchTerm, setSearchTerm] = useState("");
 
   const extractPlaylistId = (url) => {
@@ -15,8 +19,18 @@ const SpotifyCard = () => {
     if (playlistId) {
       setPlaylistUrl(`https://open.spotify.com/embed/playlist/${playlistId}`);
       setSearchTerm("");
+      saveData("playlistUrl", `https://open.spotify.com/embed/playlist/${playlistId}`);
     } else {
       alert("Please enter a valid Spotify playlist URL.");
+    }
+  };
+
+  const saveData = async (key, value) => {
+    const payload = { [key] : value};
+    try {
+        await updateWidget(roomId, player.id, payload, true);
+    } catch (error) {
+        console.error(error);
     }
   };
 
@@ -38,13 +52,12 @@ const SpotifyCard = () => {
           Load
         </button>
       </form>
+
       <div className="mt-6">
         <iframe
-          className="rounded-lg"
           src={playlistUrl}
           width="100%"
-          height="300"
-          style={{ display: 'block', margin: 0, padding: 0 }} // Key adjustments
+          height="380"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
         />
