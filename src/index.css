@@ -4,17 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.container {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-}
-.container::-webkit-scrollbar { 
+
+::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
 
 body {
   font-family: "Montserrat", sans-serif;
   overflow: auto; /* Ensure body allows overflow */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
 }
 
 
