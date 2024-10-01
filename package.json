@@ -18,6 +18,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-feather": "^2.0.10",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
