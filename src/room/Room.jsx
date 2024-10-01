@@ -15,10 +15,32 @@ import SpotifyCard from '../cards/SpotifyCard';
 import QuoteCard from '../cards/QuoteCard';
 import MotionAskCard from '../cards/MotionAskCard';
 
+const SidebarButton = ({ icon: Icon, onClick, label }) => {
+    const [isHovered, setIsHovered] = useState(false);
+  
+    return (
+      <div className="relative">
+        <button
+          className='flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-300 transition-colors'
+          onClick={onClick}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <Icon size={25} color='black'/>
+        </button>
+        {isHovered && (
+          <div className="absolute left-12 top-1/2 -translate-y-1/2 bg-white px-2 py-1 rounded shadow-md text-sm whitespace-nowrap text-black">
+            {label}
+          </div>
+        )}
+      </div>
+    );
+  };
+
 const Room = () => {
     const { roomId } = useParams();
     const [roomData, setRoomData] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
+
     const [isShareOpen, setShareOpen] = useState(false);
     const [isSettingsOpen, setSettingsOpen] = useState(false);
     const [backgroundUrl, setBackgroundUrl] = useState('');
@@ -48,6 +70,17 @@ const Room = () => {
     };
 
 
+    const buttons = [
+        { icon: HelpCircle, onClick: () => { addWidget(roomId, "motionask"); loadRoomData(); }, label: "Ask Motion" },
+        { icon: PlusSquare, onClick: () => { addWidget(roomId, "note"); loadRoomData(); }, label: "Add Sticky Note" },
+        { icon: Music, onClick: () => { addWidget(roomId, "player"); loadRoomData(); }, label: "Add Music Player" },
+        { icon: PenTool, onClick: () => { addWidget(roomId, "quote"); loadRoomData(); }, label: "Add Quote" },
+        { icon: Clock, onClick: () => { addWidget(roomId, "timer"); loadRoomData(); }, label: "Add Timer" },
+        { icon: Settings, onClick: () => setSettingsOpen(true), label: "Background Settings" },
+        { icon: Share2, onClick: () => setShareOpen(prev => !prev), label: "Share Room" },
+    ];
+
+
 
     const handleDelete = (widgetId) => {
         setRoomData(prevData => prevData.filter(widget => widget.id !== widgetId));
@@ -64,6 +97,7 @@ const Room = () => {
     };
     
     return (
+        
         <div>
             <ShareRoom 
                 isOpen={isShareOpen} 
@@ -118,54 +152,13 @@ const Room = () => {
 {/* Toolbar */}
 
 
-<div 
-      className="fixed left-2 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center bg-white p-2 rounded-full shadow-lg"
-    >
-      <div className="flex flex-col items-center space-y-4 py-2">
-        <button
-          className='flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-300 transition-colors'
-          onClick={() => { addWidget(roomId, "motionask"); loadRoomData(); }}
-        >
-          <HelpCircle size={25} color='black'/>
-        </button>
-        <button 
-          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-teal-300 transition-colors" 
-          onClick={() => { addWidget(roomId, "note"); loadRoomData(); }}
-        >
-          <PlusSquare size={25} color='black' />
-        </button>
-        <button 
-          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-green-300 transition-colors" 
-          onClick={() => { addWidget(roomId, "player"); loadRoomData(); }}
-        >
-          <Music size={25} color='black' />
-        </button>
-        <button 
-          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-fuchsia-300 transition-colors" 
-          onClick={() => { addWidget(roomId, "quote"); loadRoomData(); }}
-        >
-          <PenTool size={25} color='black' />
-        </button>
-        <button 
-          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-red-300 transition-colors" 
-          onClick={() => { addWidget(roomId, "timer"); loadRoomData(); }}
-        >
-          <Clock size={25} color='black' />
-        </button>
-        <button 
-          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-purple-300 transition-colors" 
-          onClick={() => setSettingsOpen(true)}
-        >
-          <Settings size={25} color='black' />
-        </button>
-        <button 
-          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-300 transition-colors" 
-          onClick={() => setShareOpen(prev => !prev)}
-        >
-          <Share2 size={25} color='black' />
-        </button>
-      </div>
-    </div>
+ <div className="fixed left-2 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center bg-white p-2 rounded-full shadow-lg">
+                <div className="flex flex-col items-center space-y-4 py-2">
+                    {buttons.map((button, index) => (
+                        <SidebarButton key={index} {...button} />
+                    ))}
+                </div>
+            </div>
 
         </div>
     );
