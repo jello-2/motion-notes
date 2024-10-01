@@ -1,3 +1,2 @@
-# YVR Hacks 2024
-
-Our beautiful submission for yvrhacks
+# Inspiration
+Daniel Zhang, Evan Chen, Eugene Lee, Jay Wen's submission for yvrhacks 2024
