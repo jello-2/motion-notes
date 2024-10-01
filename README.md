@@ -13,3 +13,4 @@ An all-in-one study app! Features include
 - Custom Backgrounds with beautiful preinstalled themes
 
 Customize Motion for yourself today!
+Test at getmotion.netlify.app
