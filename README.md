@@ -11,4 +11,5 @@ All-in-one study app! Features include
 - Inspirational Quotes
 - Room sharing
 - Custom Backgrounds with beautiful preinstalled themes
+
 Customize Motion for yourself today!
