@@ -105,7 +105,7 @@ function HomePage() {
           />
         </section>
 
-      <footer className="bg-white bg-opacity-30 backdrop-blur-md py-6 text-center text-gray-600">
+      <footer className="min-h-screen bg-white bg-opacity-30 backdrop-blur-md py-6 text-center text-gray-600">
         <p>&copy; 2024 Motion. Elevate your ideas.</p>
       </footer>
     </div>
