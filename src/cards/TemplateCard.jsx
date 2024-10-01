@@ -97,7 +97,7 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
         document.removeEventListener("mousedown", mouseDown);
 
         const newPosition = setNewOffset(cardRef.current); //{x,y}
-        saveData("position", newPosition);  
+        saveData("position", newPosition);  // this might be our culprit of things
     }
     
     //<----- for resizing window ---->
