@@ -18,7 +18,7 @@ const MotionAskCard = ({ note, prompt }) => {
     const { roomId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [content, setContent] = useState(note.body || '');
-    const [isEditing, setIsEditing] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
 
     const editorRef = useRef(null);
     const formattedViewRef = useRef(null);
@@ -56,7 +56,7 @@ const MotionAskCard = ({ note, prompt }) => {
     const handleSummarize = async () => {
         setIsLoading(true);
         try {
-            const aiResponse = await ask(`Summarize and format this text very concisely using markdown. Use ** for bold and * for italic. Keep the response brief and to the point: ${content}`);
+            const aiResponse = await ask(content);
             
             const processedResponse = aiResponse.split('\n').map(line => 
                 line.trim().startsWith('AI:') ? `<ai>${line.substring(3).trim()}</ai>` : line
@@ -64,7 +64,6 @@ const MotionAskCard = ({ note, prompt }) => {
 
             setContent(processedResponse);
             saveData("body", processedResponse);
-            setIsEditing(false);
         } catch (error) {
             console.error("Error in summarization:", error);
         } finally {
@@ -72,16 +71,18 @@ const MotionAskCard = ({ note, prompt }) => {
         }
     };
 
-    const toggleEdit = () => {
-        setIsEditing(!isEditing);
-        if (!isEditing) {
-            setTimeout(() => {
-                if (editorRef.current) {
-                    editorRef.current.focus();
-                    editorRef.current.setSelectionRange(editorRef.current.value.length, editorRef.current.value.length);
-                }
-            }, 0);
-        }
+    const startEditing = () => {
+        setIsEditing(true);
+        setTimeout(() => {
+            if (editorRef.current) {
+                editorRef.current.focus();
+                editorRef.current.setSelectionRange(editorRef.current.value.length, editorRef.current.value.length);
+            }
+        }, 0);
+    };
+
+    const stopEditing = () => {
+        setIsEditing(false);
     };
 
     return (
@@ -91,14 +92,15 @@ const MotionAskCard = ({ note, prompt }) => {
                     ref={editorRef}
                     value={content}
                     onChange={handleChange}
+                    onBlur={stopEditing}
                     style={{ color: colors.colorText, width: '100%', minHeight: '100px', overflow: 'hidden' }}
-                    className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-2 rounded-md"
                 />
             ) : (
                 <div 
                     ref={formattedViewRef}
                     className="w-full p-2 border rounded-md cursor-text"
-                    onClick={toggleEdit}
+                    onClick={startEditing}
                     style={{ minHeight: '100px', overflow: 'hidden' }}
                 >
                     <ReactMarkdown
@@ -110,13 +112,7 @@ const MotionAskCard = ({ note, prompt }) => {
                     </ReactMarkdown>
                 </div>
             )}
-            <div className="flex justify-between w-full mt-4">
-                <button 
-                    onClick={toggleEdit}
-                    className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                >
-                    {isEditing ? 'View Formatted' : 'Edit'}
-                </button>
+            <div className="flex justify-end w-full mt-4">
                 <button 
                     onClick={handleSummarize} 
                     disabled={isLoading}
