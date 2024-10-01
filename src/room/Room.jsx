@@ -119,58 +119,53 @@ const Room = () => {
 
 
 <div 
-    className="fixed left-0 top-1/2 transform -translate-y-1/2 z-50 flex flex-col items-start"
-    onMouseEnter={() => setIsOpen(true)}
-    onMouseLeave={() => setIsOpen(false)}
->
-
-    <div className={`flex flex-col items-center space-y-3 bg-white p-2 rounded-r-md shadow-md transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      className="fixed left-2 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center bg-white p-2 rounded-full shadow-lg"
+    >
+      <div className="flex flex-col items-center space-y-4 py-2">
         <button
-         className='flex items-center w-full p-2 rounded-md hover:bg-blue-300 transition-colors'
-         onClick={() => { addWidget(roomId, "motionask"); loadRoomData(); }}
+          className='flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-300 transition-colors'
+          onClick={() => { addWidget(roomId, "motionask"); loadRoomData(); }}
         >
-        <HelpCircle size={20} color='black'/>
+          <HelpCircle size={25} color='black'/>
         </button>
         <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-teal-300 transition-colors" 
-            onClick={() => { addWidget(roomId, "note"); loadRoomData(); }}
+          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-teal-300 transition-colors" 
+          onClick={() => { addWidget(roomId, "note"); loadRoomData(); }}
         >
-            <PlusSquare size={20} color='black' />
+          <PlusSquare size={25} color='black' />
         </button>
         <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-green-300 transition-colors" 
-            onClick={() => { addWidget(roomId, "player"); loadRoomData(); }}
+          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-green-300 transition-colors" 
+          onClick={() => { addWidget(roomId, "player"); loadRoomData(); }}
         >
-            <Music size={20} color='black' />
+          <Music size={25} color='black' />
         </button>
         <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-fuchsia-300 transition-colors" 
-            onClick={() => { addWidget(roomId, "quote"); loadRoomData(); }}
+          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-fuchsia-300 transition-colors" 
+          onClick={() => { addWidget(roomId, "quote"); loadRoomData(); }}
         >
-            <PenTool size={20} color='black' />
+          <PenTool size={25} color='black' />
         </button>
         <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-red-300 transition-colors" 
-            onClick={() => { addWidget(roomId, "timer"); loadRoomData(); }}
+          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-red-300 transition-colors" 
+          onClick={() => { addWidget(roomId, "timer"); loadRoomData(); }}
         >
-            <Clock size={20} color='black' />
+          <Clock size={25} color='black' />
         </button>
         <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-purple-300 transition-colors" 
-            onClick={() => setSettingsOpen(true)}
+          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-purple-300 transition-colors" 
+          onClick={() => setSettingsOpen(true)}
         >
-            <Settings size={20} color='black' />
+          <Settings size={25} color='black' />
         </button>
         <button 
-            className="flex items-center w-full p-2 rounded-md hover:bg-blue-300 transition-colors" 
-            onClick={() => setShareOpen(prev => !prev)}
+          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-300 transition-colors" 
+          onClick={() => setShareOpen(prev => !prev)}
         >
-            <Share2 size={20} color='black' />
+          <Share2 size={25} color='black' />
         </button>
+      </div>
     </div>
-</div>
-
-
 
         </div>
     );
