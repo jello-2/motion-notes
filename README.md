@@ -2,7 +2,7 @@
 Daniel Zhang, Evan Chen, Eugene Lee, Jay Wen's submission for yvrhacks 2024
 
 # Functionality
-All-in-one study app! Features include
+An all-in-one study app! Features include
 - Adjustable, draggable, colour changing components
 - Stickynotes
 - AI "Ask Motion" copilot
