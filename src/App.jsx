@@ -4,6 +4,7 @@ import { ChevronRight, Users, Droplet, Layout } from 'react-feather';
 import Room from './room/Room';
 import { motion } from 'framer-motion';
 import createRoom from './room/CreateRoom';
+
 const Button = ({ children, className, ...props }) => (
   <button
     className={`px-6 py-2 rounded-full transition-colors ${className}`}
@@ -44,7 +45,7 @@ function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100 text-gray-800 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100 text-gray-800">
       <header className="bg-white bg-opacity-30 backdrop-blur-md p-4 flex justify-between items-center sticky top-0 z-10">
         <div className='flex items-center space-x-2'>
           <img src='/motion.png' alt="Motion Logo" className='h-8 w-8' />
