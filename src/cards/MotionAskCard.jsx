@@ -29,7 +29,7 @@ const MotionAskCard = ({ note, prompt }) => {
     const saveData = async (key, value) => {
         const payload = { [key]: JSON.stringify(value) };
         try {
-            await updateWidget(roomId, note.id, payload);
+            await updateWidget(roomId, note.id, payload, true);
         } catch (error) {
             console.error(error);
         }
