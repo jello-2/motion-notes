@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import updateWidget from '../room/UpdateWidget.jsx';
 
 const gridsnap = (value, gridSize) => Math.ceil(value / gridSize) * gridSize;
@@ -10,16 +9,6 @@ const autoGrow = (element) => {
         element.style.height = 'auto';
         element.style.height = gridsnap(element.scrollHeight, 20) + 'px';
     }
-};
-
-// Custom component to preserve all newlines, including empty ones
-const PreserveWhitespace = ({ children }) => {
-    return children.split('\n').map((line, index, array) => (
-        <span key={index}>
-            {line}
-            {index < array.length - 1 && <br />}
-        </span>
-    ));
 };
 
 const NoteCard = ({ note }) => {
@@ -74,13 +63,14 @@ const NoteCard = ({ note }) => {
         }
     };
 
-    // Custom renderer for ReactMarkdown
-    const renderers = {
-        paragraph: ({ children }) => <PreserveWhitespace>{children}</PreserveWhitespace>,
-        // This ensures that single newlines within a paragraph are preserved
-        softbreak: () => <br />,
-        // This handles empty newlines between paragraphs
-        break: () => <br />,
+    // Function to preserve exact formatting, including newlines and spaces
+    const formatContent = (text) => {
+        return text.split('\n').map((line, index) => (
+            <span key={index}>
+                {line}
+                {index < text.split('\n').length - 1 && <br />}
+            </span>
+        ));
     };
 
     return (
@@ -99,11 +89,14 @@ const NoteCard = ({ note }) => {
                     ref={formattedViewRef}
                     className="w-full p-2 rounded-md cursor-text"
                     onClick={startEditing}
-                    style={{ minHeight: '100px', overflow: 'hidden', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+                    style={{ 
+                        minHeight: '100px', 
+                        overflow: 'hidden', 
+                        whiteSpace: 'pre-wrap', 
+                        wordWrap: 'break-word',
+                    }}
                 >
-                    <ReactMarkdown components={renderers}>
-                        {content}
-                    </ReactMarkdown>
+                    {formatContent(content)}
                 </div>
             )}
         </div>
@@ -111,3 +104,4 @@ const NoteCard = ({ note }) => {
 };
 
 export default NoteCard;
+
