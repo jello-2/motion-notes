@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import updateWidget from '../room/UpdateWidget.jsx';
 
 const gridsnap = (value, gridSize) => Math.ceil(value / gridSize) * gridSize;
@@ -63,40 +64,57 @@ const NoteCard = ({ note }) => {
         }
     };
 
-    // Function to preserve exact formatting, including newlines and spaces
-    const formatContent = (text) => {
-        return text.split('\n').map((line, index) => (
-            <span key={index}>
-                {line}
-                {index < text.split('\n').length - 1 && <br />}
-            </span>
-        ));
-    };
+    const CustomParagraph = ({ children }) => (
+        <p style={{ whiteSpace: 'pre-wrap', marginBottom: '1em' }}>{children}</p>
+    );
+
+    const CustomText = ({ children }) => <p  style={{ whiteSpace: 'pre-wrap', marginBottom: '1em' }}>{children}</p>;
 
     return (
-        <div className="card-body flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+        <div 
+            className="card-body flex flex-col items-center p-4 rounded-lg shadow-md"
+            style={{ backgroundColor: colors.colorBg }}
+        >
             {isEditing ? (
                 <textarea
                     ref={editorRef}
                     value={content}
                     onChange={handleChange}
                     onBlur={stopEditing}
-                    style={{ color: colors.colorText, width: '100%', minHeight: '100px', overflow: 'hidden' }}
+                    style={{ 
+                        color: colors.colorText, 
+                        width: '100%', 
+                        minHeight: '100px', 
+                        overflow: 'hidden',
+                        backgroundColor: 'transparent',
+                    }}
                     className="w-full p-2 rounded-md"
                 />
             ) : (
                 <div 
                     ref={formattedViewRef}
-                    className="w-full p-2 rounded-md cursor-text"
+                    className="w-full p-2 rounded-md cursor-text markdown-body"
                     onClick={startEditing}
                     style={{ 
                         minHeight: '100px', 
                         overflow: 'hidden', 
-                        whiteSpace: 'pre-wrap', 
                         wordWrap: 'break-word',
+                        color: colors.colorText,
+                        backgroundColor: 'transparent',
                     }}
                 >
-                    {formatContent(content)}
+                    <ReactMarkdown 
+                        components={{
+                            p: CustomParagraph,
+                            li: CustomText,
+                            ul: CustomText,
+                            ol: CustomText,
+                            blockquote: CustomText,
+                        }}
+                        disableParsingRawHTML={true}
+                    >
+                        {content}
+                    </ReactMarkdown>
                 </div>
             )}
         </div>
@@ -104,4 +122,3 @@ const NoteCard = ({ note }) => {
 };
 
 export default NoteCard;
-
