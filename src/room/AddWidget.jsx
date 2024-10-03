@@ -25,11 +25,6 @@ const defaultWidgets = {
   timer: {
     type: 'timer',
     body: 'This is a timer.',
-    time: {
-      hours: 0,
-      minutes: 30,
-      seconds: 0,
-    },
     position: { x: 200, y: 100 },
     width: 400,
   },
@@ -56,7 +51,7 @@ const defaultWidgets = {
     type: 'motionask',
     body: 'Ask away!',
     position: { x: 200, y: 100 },
-    width: 210,
+    width: 300,
   },
 };
 
@@ -75,10 +70,6 @@ const addWidget = async (roomCode, widgetType) => {
         position: JSON.stringify(widgetData.position),
         width: widgetData.width.toString(),
       };
-
-      if (widgetData.time) {
-        preparedData.time = JSON.stringify(widgetData.time);
-      }
 
       await addDoc(widgetRef, preparedData);
       console.log(`${widgetType} widget added successfully with ${randomColorPreset.name} color scheme!`);
