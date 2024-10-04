@@ -14,6 +14,8 @@ import Card from '../cards/TemplateCard';
 import SpotifyCard from '../cards/SpotifyCard';
 import QuoteCard from '../cards/QuoteCard';
 import MotionAskCard from '../cards/MotionAskCard';
+import PasswordPrompt from './PasswordPrompt';
+import LoadingSpinner from '../utilities/LoadingSpinner';
 
 const SidebarButton = ({ icon: Icon, onClick, label }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -40,16 +42,75 @@ const SidebarButton = ({ icon: Icon, onClick, label }) => {
 const Room = () => {
     const { roomId } = useParams();
     const [roomData, setRoomData] = useState([]);
+    const [isPasswordProtected, setIsPasswordProtected] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const [isShareOpen, setShareOpen] = useState(false);
     const [isSettingsOpen, setSettingsOpen] = useState(false);
     const [backgroundUrl, setBackgroundUrl] = useState('');
     const [backgroundDarkness, setBackgroundDarkness] = useState(0);
-
+    
     useEffect(() => {
-        loadRoomData();
-        loadRoomSettings();
+        checkRoomAccess();
     }, [roomId]);
+
+    const checkRoomAccess = async () => {
+        setIsLoading(true);
+        const roomDocRef = doc(db, 'rooms', roomId);
+        try {
+            const roomDoc = await getDoc(roomDocRef);
+            if (roomDoc.exists()) {
+                const data = roomDoc.data();
+                if (data.password) {
+                    setIsPasswordProtected(true);
+                    setIsAuthenticated(false);
+                } else {
+                    setIsPasswordProtected(false);
+                    setIsAuthenticated(true);
+                    await loadRoomData();
+                    await loadRoomSettings();
+                }
+            } else {
+                // If the room doesn't exist, create it without password protection
+                await setDoc(roomDocRef, { password: '' });
+                setIsPasswordProtected(false);
+                setIsAuthenticated(true);
+                await loadRoomData();
+                await loadRoomSettings();
+            }
+        } catch (error) {
+            console.error("Error checking room access:", error);
+            // Handle the error appropriately (e.g., show an error message to the user)
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
+    const handlePasswordSubmit = async (password) => {
+        setIsLoading(true);
+        const roomDocRef = doc(db, 'rooms', roomId);
+        try {
+            const roomDoc = await getDoc(roomDocRef);
+            if (roomDoc.exists()) {
+                const data = roomDoc.data();
+                if (data.password === password) {
+                    setIsAuthenticated(true);
+                    await loadRoomData();
+                    await loadRoomSettings();
+                } else {
+                    alert('Incorrect password. Please try again.');
+                }
+            }
+        } catch (error) {
+            console.error("Error validating password:", error);
+            // Handle the error appropriately
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
 
     const loadRoomData = async () => {
         const data = await fetchRoomData(roomId);
@@ -68,7 +129,6 @@ const Room = () => {
             await setDoc(roomDocRef, { backgroundUrl: '', backgroundDarkness: 0 });
         }
     };
-
 
     const buttons = [
         { icon: PlusSquare, onClick: () => { addWidget(roomId, "note"); loadRoomData(); }, label: "Add Sticky Note" },
@@ -94,6 +154,14 @@ const Room = () => {
         }, { merge: true });
     };
     
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
+
+    if (isPasswordProtected && !isAuthenticated) {
+        return <PasswordPrompt onPasswordSubmit={handlePasswordSubmit} />;
+    }
+
     return (
         <div>
             <ShareRoom 

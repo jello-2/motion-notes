@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { ChevronRight, Users, Droplet, Layout, Check, X } from 'react-feather';
+import { ChevronRight, Users, Droplet, Layout, Check, X, Plus } from 'react-feather';
 import Room from './room/Room';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from './Firebase';
 import { motion, AnimatePresence } from 'framer-motion';
 import createRoom from './room/CreateRoom';
 
@@ -93,13 +95,42 @@ const PlanComparison = () => (
   </motion.div>
 );
 
+
 function HomePage() {
   const [roomCode, setRoomCode] = useState('');
+  const [isShaking, setIsShaking] = useState(false);
+  const [customRoomName, setCustomRoomName] = useState('');
   const navigate = useNavigate();
 
-  const handleJoinRoom = () => {
+  const checkRoomExists = async (roomId) => {
+    const roomRef = doc(db, 'rooms', roomId);
+    const roomSnap = await getDoc(roomRef);
+    return roomSnap.exists();
+  };
+  const handleJoinRoom = async () => {
     if (roomCode) {
-      navigate(`/room/${roomCode}`);
+      const roomExists = await checkRoomExists(roomCode);
+      if (roomExists) {
+        navigate(`/room/${roomCode}`);
+      } else {
+        setIsShaking(true);
+        setTimeout(() => setIsShaking(false), 500); // Stop shaking after 500ms
+      }
+    }
+  };
+
+  const handleCreateRoom = () => {
+    if (customRoomName.trim() !== "") {
+      createRoom(customRoomName);
+    } else {
+      createRoom();
+    }
+  };
+
+  const shakeAnimation = {
+    shaking: {
+      x: [-10, 10, -10, 10, 0],
+      transition: { duration: 0.4 }
     }
   };
 
@@ -153,13 +184,18 @@ function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Input
-              type="text"
-              placeholder="Enter Room Code"
-              value={roomCode}
-              onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-              className="sm:w-64"
-            />
+            <motion.div
+              animate={isShaking ? "shaking" : ""}
+              variants={shakeAnimation}
+            >
+              <Input
+                type="text"
+                placeholder="Enter Room Code"
+                value={roomCode}
+                onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+                className={`sm:w-64 ${isShaking ? 'border-red-500' : ''}`}
+              />
+            </motion.div>
             <Button 
               onClick={handleJoinRoom}
               className="bg-blue-400 hover:bg-blue-500 text-white"
@@ -168,12 +204,21 @@ function HomePage() {
             </Button>
           </div>
           
-          <Button
-            onClick={createRoom}
-            className="mt-4 bg-purple-400 hover:bg-purple-500 text-white"
-          >
-            Create New Room
-          </Button>
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4">
+                <Input
+              type="text"
+              placeholder="Custom Room Name (optional)"
+              value={customRoomName}
+              onChange={(e) => setCustomRoomName(e.target.value)}
+              className="sm:w-64"
+            />
+            <Button
+              onClick={handleCreateRoom}
+              className="bg-purple-400 hover:bg-purple-500 text-white"
+            >
+              New Room <Plus className="inline ml-2" size={18} />
+            </Button>
+          </div>
         </motion.section>
 
         <motion.section 
