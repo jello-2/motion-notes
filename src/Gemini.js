@@ -9,8 +9,12 @@ const ask = async (prompt) => {
         return result.response.text();
     } catch (error) {
         console.error('Error generating content:', error);
+        if (error.message.includes('Candidate was blocked due to SAFETY')) {
+            return "Content may be inappropriate.";
+        }
         throw error;
     }
 };
+
 
 export default ask;

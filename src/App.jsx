@@ -51,7 +51,7 @@ const PlanFeature = ({ feature, isIncluded, isPro = false }) => (
     transition={{ duration: 0.5 }}
   >
     {isIncluded ? (
-      <Check className={`w-5 h-5 ${isPro ? 'text-green-500' : 'text-blue-500'}`} />
+      <Check className={`w-5 h-5 ${isPro ? 'text-green-500 w-6 h-6' : 'text-blue-500'}`} />
     ) : (
       <X className="w-5 h-5 text-red-500" />
     )}
@@ -61,7 +61,7 @@ const PlanFeature = ({ feature, isIncluded, isPro = false }) => (
 
 const PlanComparison = () => (
   <motion.div 
-    className="grid md:grid-cols-2 gap-8 bg-white bg-opacity-70 p-8 rounded-2xl backdrop-blur-sm shadow-lg"
+    className="grid md:grid-cols-2 gap-8 bg-white bg-opacity-70 p-8 rounded-2xl backdrop-blur-sm shadow-lg mx-4"
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -71,25 +71,21 @@ const PlanComparison = () => (
       <PlanFeature feature="Up to 3 collaborators" isIncluded={true} />
       <PlanFeature feature="Basic color themes" isIncluded={true} />
       <PlanFeature feature="Standard templates" isIncluded={true} />
-      <PlanFeature feature="5GB storage" isIncluded={true} />
-      <PlanFeature feature="Community support" isIncluded={true} />
-      <PlanFeature feature="Unlimited collaborators" isIncluded={false} />
+      <PlanFeature feature="Motion Ask" isIncluded={true} />
       <PlanFeature feature="Advanced color themes" isIncluded={false} />
       <PlanFeature feature="Custom templates" isIncluded={false} />
-      <PlanFeature feature="Unlimited storage" isIncluded={false} />
+      <PlanFeature feature="Private rooms" isIncluded={false} />
       <PlanFeature feature="Priority support" isIncluded={false} />
     </div>
     <div>
       <h3 className="text-2xl font-semibold mb-4">Pro Plan</h3>
-      <PlanFeature feature="Up to 3 collaborators" isIncluded={true} isPro={true} />
+      <PlanFeature feature="Unlimited collaborators" isIncluded={true} isPro={true} />
       <PlanFeature feature="Basic color themes" isIncluded={true} isPro={true} />
       <PlanFeature feature="Standard templates" isIncluded={true} isPro={true} />
-      <PlanFeature feature="5GB storage" isIncluded={true} isPro={true} />
-      <PlanFeature feature="Community support" isIncluded={true} isPro={true} />
-      <PlanFeature feature="Unlimited collaborators" isIncluded={true} isPro={true} />
+      <PlanFeature feature="Motion Ask Enhanced" isIncluded={true} isPro={true} />
       <PlanFeature feature="Advanced color themes" isIncluded={true} isPro={true} />
       <PlanFeature feature="Custom templates" isIncluded={true} isPro={true} />
-      <PlanFeature feature="Unlimited storage" isIncluded={true} isPro={true} />
+      <PlanFeature feature="Private rooms" isIncluded={true} isPro={true} />
       <PlanFeature feature="Priority support" isIncluded={true} isPro={true} />
     </div>
   </motion.div>
@@ -160,7 +156,7 @@ function HomePage() {
               Motion
             </span>
           </div>
-          <nav className="flex items-center space-x-4">
+          <nav className="flex items-center space-x-12">
             <a href="#features" className="text-gray-600 hover:text-gray-800">Features</a>
             <a href="#pricing" className="text-gray-600 hover:text-gray-800">Pricing</a>
             <Button className="bg-blue-400 hover:bg-blue-500 text-white">
@@ -223,7 +219,7 @@ function HomePage() {
 
         <motion.section 
           id="features" 
-          className="grid md:grid-cols-3 gap-8 m-12"
+          className="grid md:grid-cols-3 gap-8 m-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
