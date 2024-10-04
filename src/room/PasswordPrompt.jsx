@@ -6,7 +6,7 @@ const PasswordPrompt = ({ onPasswordSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password.trim() === '') {
+    if (password === '') {
       setError('Password cannot be empty');
     } else {
       onPasswordSubmit(password);

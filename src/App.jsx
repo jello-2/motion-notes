@@ -209,7 +209,7 @@ function HomePage() {
               type="text"
               placeholder="Custom Code (optional)"
               value={customRoomName}
-              onChange={(e) => setCustomRoomName(e.target.value)}
+              onChange={(e) => setCustomRoomName(e.target.value.toUpperCase())}
               className="sm:w-64"
             />
             <Button
