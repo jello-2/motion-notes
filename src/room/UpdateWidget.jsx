@@ -54,9 +54,8 @@ const instantUpdateWidget = async (roomCode, noteId, updatedNote) => {
   try {
     const noteRef = doc(collection(db, roomCode), noteId);
     await updateDoc(noteRef, updatedNote);
-    console.log("Instant updated note");
   } catch (error) {
-    console.error("Error updating note: ", error);
+    console.error("Error instant updating note: ", error);
   }
 }
 

@@ -17,7 +17,6 @@ const fetchRoomData = async (roomCode) => {
             };
             roomData.push(parsedData);
         });
-        console.log(roomData);
         return roomData; //array of notes
     } catch (e) {
         console.error("Error fetching room data: ", e);
