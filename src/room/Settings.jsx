@@ -13,7 +13,7 @@ const templateImages = [
     { name: 'Retro', url: 'https://wallpapercave.com/wp/wp2757967.gif' },
     { name: 'Sugoi', url: 'https://firebasestorage.googleapis.com/v0/b/yvrnotes-77c78.appspot.com/o/room-backgrounds%2FNIGHTTIME%2Fcar.gif?alt=media&token=4b3ccbfd-cbbd-4ad4-a354-2949a0792200' },
     { name: 'Rain', url: '/rain.gif' },
-    { name: 'Kawaii ≽^•⩊•^≼', url: 'https://wallpaperaccess.com/full/8278309.gif' },
+    { name: 'Kawaii ≽^•⩊•^≼', url: '/kawaii.gif' },
 ];
     
 const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgroundUrl, currentDarkness }) => {

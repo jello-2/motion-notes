@@ -51,8 +51,17 @@ const Room = () => {
     const [backgroundUrl, setBackgroundUrl] = useState('');
     const [backgroundDarkness, setBackgroundDarkness] = useState(0);
     
+    
+
     useEffect(() => {
         checkRoomAccess();
+
+        const roomCollectionRef = collection(db, roomId);
+        const unsubscribe = onSnapshot(roomCollectionRef, () => {
+            loadRoomData();
+        });
+
+        return () => unsubscribe();
     }, [roomId]);
 
     const checkRoomAccess = async () => {

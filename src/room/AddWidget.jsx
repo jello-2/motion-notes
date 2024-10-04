@@ -1,5 +1,6 @@
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
+import { processBatchUpdate } from './UpdateWidget';
 
 const colorPresets = [
   { name: 'Soft Peach', header: '#FFDAB9', body: '#FFF0E6', text: '#8B4513' },
@@ -57,6 +58,7 @@ const defaultWidgets = {
 
 const addWidget = async (roomCode, widgetType) => {
   try {
+    await processBatchUpdate();
     const widgetRef = collection(db, roomCode);
     const widgetData = defaultWidgets[widgetType];
 

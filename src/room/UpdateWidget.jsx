@@ -8,7 +8,7 @@ const BATCH_INTERVAL = 0; // 1 seconds
 let updateQueue = {};
 let batchUpdateTimeout = null;
 
-const processBatchUpdate = async () => {
+export const processBatchUpdate = async () => {
   const batch = writeBatch(db);
   const currentQueue = { ...updateQueue };
   updateQueue = {};
