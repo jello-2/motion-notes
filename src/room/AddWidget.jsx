@@ -58,7 +58,6 @@ const defaultWidgets = {
 
 const addWidget = async (roomCode, widgetType) => {
   try {
-    await processBatchUpdate();
     const widgetRef = collection(db, roomCode);
     const widgetData = defaultWidgets[widgetType];
 
@@ -73,6 +72,14 @@ const addWidget = async (roomCode, widgetType) => {
         width: widgetData.width.toString(),
       };
 
+      try {
+        await processBatchUpdate();
+        console.log("Batch update processed successfully");
+      } catch (batchError) {
+        console.error("Error processing batch update:", batchError);
+        // We continue with adding the document even if processBatchUpdate fails
+      }
+
       await addDoc(widgetRef, preparedData);
       console.log(`${widgetType} widget added successfully with ${randomColorPreset.name} color scheme!`);
     } else {
@@ -82,5 +89,4 @@ const addWidget = async (roomCode, widgetType) => {
     console.error(`Error adding ${widgetType} widget:`, error);
   }
 };
-
 export default addWidget;
