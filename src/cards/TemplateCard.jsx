@@ -47,6 +47,13 @@ const Card = ({ widget, BodyComponent, onDelete, min_width }) => {
     const cardRef = useRef(null);
     const isResizing = useRef(false);
 
+    useEffect(() => {
+        setWidth(widget.width);
+        setPosition(widget.position);
+        setColors(widget.colors);
+    }, [widget]);
+
+    
     let mouseStartPos = { x: 0, y: 0 };
     let dragStartPosX = 0;
 

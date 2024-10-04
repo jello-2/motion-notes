@@ -2,8 +2,7 @@ import { doc, writeBatch, collection, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import debounce from 'lodash/debounce';
 
-const DEBOUNCE_DELAY = 1500; // 500ms delay
-const BATCH_INTERVAL = 0; // 1 seconds
+const DEBOUNCE_DELAY = 1200;
 
 let updateQueue = {};
 let batchUpdateTimeout = null;
@@ -32,7 +31,7 @@ export const processBatchUpdate = async () => {
 
 const scheduleBatchUpdate = debounce(() => {
   if (batchUpdateTimeout) clearTimeout(batchUpdateTimeout);
-  batchUpdateTimeout = setTimeout(processBatchUpdate, BATCH_INTERVAL);
+  batchUpdateTimeout = setTimeout(processBatchUpdate, 0);
 }, DEBOUNCE_DELAY);
 
 const updateWidget = (roomCode, noteId, updatedNote, bypass=false) => {
