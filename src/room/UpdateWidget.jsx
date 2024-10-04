@@ -2,7 +2,7 @@ import { doc, writeBatch, collection, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import debounce from 'lodash/debounce';
 
-const DEBOUNCE_DELAY = 1200;
+const DEBOUNCE_DELAY = 3000;
 
 let updateQueue = {};
 let batchUpdateTimeout = null;
