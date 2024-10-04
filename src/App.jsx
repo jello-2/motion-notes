@@ -207,7 +207,7 @@ function HomePage() {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4">
                 <Input
               type="text"
-              placeholder="Custom Room Name (optional)"
+              placeholder="Custom Code (optional)"
               value={customRoomName}
               onChange={(e) => setCustomRoomName(e.target.value)}
               className="sm:w-64"
