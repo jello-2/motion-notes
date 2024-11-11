@@ -7,8 +7,9 @@ const DEBOUNCE_DELAY = 3000;
 let updateQueue = {};
 let batchUpdateTimeout = null;
 
+
 export const processBatchUpdate = async () => {
-  const batch = writeBatch(db);
+  const batch = writeBatch(db); 
   const currentQueue = { ...updateQueue };
   updateQueue = {};
 
