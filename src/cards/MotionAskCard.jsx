@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import updateWidget from '../room/UpdateWidget.jsx';
 import ask from '../Gemini.js';
 
+
 const gridsnap = (value, gridSize) => Math.ceil(value / gridSize) * gridSize;
 
 const autoGrow = (element) => {
@@ -26,6 +27,7 @@ const MotionAskCard = ({ note, prompt }) => {
 
     const colors = note.colors;
 
+
     useEffect(() => {
         if (isEditing && editorRef.current) {
             autoGrow(editorRef.current);
@@ -33,7 +35,7 @@ const MotionAskCard = ({ note, prompt }) => {
             autoGrow(formattedViewRef.current);
         }
     }, [content, isEditing]);
-
+    
     const handleChange = (e) => {
         setContent(e.target.value);
         if (keyUpTimer.current) {
