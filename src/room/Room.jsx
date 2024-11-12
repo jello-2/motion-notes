@@ -6,7 +6,8 @@ import fetchRoomData from './FetchRoom';
 import addWidget from './AddWidget';
 import ShareRoom from './ShareRoom';
 import SettingsModal from './Settings';
-import { Share2, Clock, Music, PenTool, Settings, PlusSquare, HelpCircle } from 'react-feather';
+import PetModal from './Pet';
+import { Share2, Clock, Music, PenTool, Settings, PlusSquare, HelpCircle, Gift } from 'react-feather';
 import { collection, onSnapshot, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 
@@ -46,6 +47,7 @@ const Room = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
+    const [isPetModalOpen, setPetModalOpen] = useState(false);
     const [isShareOpen, setShareOpen] = useState(false);
     const [isSettingsOpen, setSettingsOpen] = useState(false);
     const [backgroundUrl, setBackgroundUrl] = useState('');
@@ -147,6 +149,7 @@ const Room = () => {
         { icon: Clock, onClick: () => { addWidget(roomId, "timer"); loadRoomData(); }, label: "Add Timer" },
         { icon: Settings, onClick: () => setSettingsOpen(true), label: "Background Settings" },
         { icon: Share2, onClick: () => setShareOpen(prev => !prev), label: "Share Room" },
+        { icon: Gift, onClick: () => setPetModalOpen(true), label: "Study Pet" }
     ];
 
     const handleDelete = (widgetId) => {
@@ -173,6 +176,11 @@ const Room = () => {
 
     return (
         <div>
+            <PetModal 
+            isOpen={isPetModalOpen} 
+            onClose={() => setPetModalOpen(false)} 
+            roomId={roomId}
+            />
             <ShareRoom 
                 isOpen={isShareOpen} 
                 onClose={() => setShareOpen(false)} 

@@ -5,6 +5,7 @@ import { ChevronRight, Users, Droplet, Layout, Check, X, Plus } from 'react-feat
 import Room from './room/Room';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './Firebase';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import createRoom from './room/CreateRoom';
 
