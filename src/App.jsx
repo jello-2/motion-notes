@@ -253,9 +253,6 @@ function HomePage() {
           </h2>
           <PlanComparison />
           <div className="text-center mt-8">
-            <Button className="bg-blue-400 hover:bg-blue-500 text-white">
-              Start Free Trial
-            </Button>
           </div>
         </motion.section>
 
@@ -279,4 +276,3 @@ function App() {
 }
 
 export default App;
-

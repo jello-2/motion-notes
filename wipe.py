@@ -49,3 +49,4 @@ if __name__ == "__main__":
 
     # Delete all 4-letter documents inside the "rooms" collection
     delete_4_letter_documents_in_rooms()
+    
