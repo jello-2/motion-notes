@@ -22,6 +22,12 @@ const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgrou
     const [newPassword, setNewPassword] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
 
+    // Set Blossom as default background when component mounts
+    React.useEffect(() => {
+        const blossomBackground = templateImages.find(img => img.name === 'Blossom').url;
+        onBackgroundChange(blossomBackground, darkness);
+    }, []); // Empty dependency array means this runs once on mount
+
 
     const handlePasswordChange = async (event) => {
         event.preventDefault();
@@ -111,6 +117,7 @@ const Settings = ({ isOpen, onClose, roomId, onBackgroundChange, currentBackgrou
                             </label>
                             <select
                                 onChange={handleTemplateChange}
+                                value={currentBackgroundUrl}
                                 className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md text-black"
                             >
                                 <option value="">Select template</option>
