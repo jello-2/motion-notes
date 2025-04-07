@@ -2,6 +2,7 @@
 An all-in-one study app! Features include
 - Adjustable, draggable, colour changing components
 - Stickynotes
+- Accessible from everywhere!
 - AI "Ask Motion" copilot
 - Spotify Integration
 - Pomodoro Timers
