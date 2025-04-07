@@ -5,7 +5,6 @@ import ReactMarkdown from 'react-markdown';
 import updateWidget from '../room/UpdateWidget.jsx';
 import ask from '../Gemini.js';
 
-
 const gridsnap = (value, gridSize) => Math.ceil(value / gridSize) * gridSize;
 
 const autoGrow = (element) => {
@@ -27,7 +26,6 @@ const MotionAskCard = ({ note, prompt }) => {
 
     const colors = note.colors;
 
-
     useEffect(() => {
         if (isEditing && editorRef.current) {
             autoGrow(editorRef.current);
@@ -35,14 +33,18 @@ const MotionAskCard = ({ note, prompt }) => {
             autoGrow(formattedViewRef.current);
         }
     }, [content, isEditing]);
-    
+
     const handleChange = (e) => {
-        setContent(e.target.value);
+        const newText = e.target.value;
+        setContent(newText);
+        // Clear any existing timer before starting a new one
         if (keyUpTimer.current) {
             clearTimeout(keyUpTimer.current);
         }
+        // Restart the debounce timer (currently set to 1000ms; adjust as needed)
         keyUpTimer.current = setTimeout(() => {
-            saveData("body", e.target.value);
+            saveData("body", newText);
+            keyUpTimer.current = null;
         }, 1000);
     };
 
@@ -51,7 +53,7 @@ const MotionAskCard = ({ note, prompt }) => {
         try {
             await updateWidget(roomId, note.id, payload, true);
         } catch (error) {
-            console.error(error);
+            console.error("Save data error:", error);
         }
     };
 
@@ -79,6 +81,12 @@ const MotionAskCard = ({ note, prompt }) => {
     };
 
     const stopEditing = () => {
+        // Clear any pending timer and force an immediate save on blur
+        if (keyUpTimer.current) {
+            clearTimeout(keyUpTimer.current);
+            keyUpTimer.current = null;
+        }
+        saveData("body", content);
         setIsEditing(false);
     };
 
@@ -105,7 +113,6 @@ const MotionAskCard = ({ note, prompt }) => {
                     </ReactMarkdown>
                 </div>
             )}
-
 
             <div className="flex justify-center w-full mt-4">
                 <button 
