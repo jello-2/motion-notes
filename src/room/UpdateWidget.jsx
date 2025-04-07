@@ -7,7 +7,6 @@ const DEBOUNCE_DELAY = 0;
 let updateQueue = {};
 let batchUpdateTimeout = null;
 
-
 export const processBatchUpdate = async () => {
   const batch = writeBatch(db); 
   const currentQueue = { ...updateQueue };
@@ -35,11 +34,10 @@ const scheduleBatchUpdate = debounce(() => {
   batchUpdateTimeout = setTimeout(processBatchUpdate, 0);
 }, DEBOUNCE_DELAY);
 
-const updateWidget = (roomCode, noteId, updatedNote, bypass=false) => {
-  if (bypass) { //if you need without delay
+export const updateWidget = (roomCode, noteId, updatedNote, bypass = false) => {
+  if (bypass) { // Trigger instant update
     instantUpdateWidget(roomCode, noteId, updatedNote);
-  }
-  else {
+  } else {
     if (!updateQueue[roomCode]) {
       updateQueue[roomCode] = {};
     }
@@ -55,9 +53,10 @@ const instantUpdateWidget = async (roomCode, noteId, updatedNote) => {
   try {
     const noteRef = doc(collection(db, roomCode), noteId);
     await updateDoc(noteRef, updatedNote);
+    console.log("Instant update successful!");
   } catch (error) {
     console.error("Error instant updating note: ", error);
   }
-}
+};
 
 export default updateWidget;
